@@ -10,8 +10,10 @@ let expenseList = document.getElementById('expense-list')
 
 // add addEventListener to addExpense Button,edit and delete button 
 
-expenseBtn.addEventListener('click', addExpense)
+// expenseBtn.addEventListener('click', addExpense)
 
+const addExpenseForm=document.getElementById('add-expense-form')
+addExpenseForm.addEventListener('submit',addExpense)
 
 //function to add expense details 
 //saving the expense details to database and showing it on screen too 

@@ -7,13 +7,13 @@ exports.getHomePage = (req, res, next) => {
 }
 
 exports.postAddExpenseDetails = (req, res, next) => {
-  
+  console.log('inside postAddExpenseDetails controller')
     Expense.create({
       amount: req.body.amount,
       description: req.body.description,
       category: req.body.category
     }).then((response) => {
-      console.log(response)
+      // console.log(response)
       res.json(response)
 
     }).catch((error)=>{
@@ -28,7 +28,7 @@ exports.getExpenses = (req, res, next) => {
   Expense.findAll()
     .then((result) => {
       console.log('entered into getExpenses controller')
-      console.log(result)
+      // console.log(result)
       res.json(result)
     })
     .catch((error) => {
