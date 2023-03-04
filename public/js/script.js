@@ -20,14 +20,14 @@ async function addExpense() {
 
     try {
         //get all input elements 
-        let expenseId=document.getElementById('expense-id')
+       
         let expenseAmount = document.getElementById('expense-amount')
         let expenseDescription = document.getElementById('expense-description')
         let expenseCategory = document.getElementById('expense-category')
 
         //crate object of expense details entered by the user
         let expenseDetails = {
-            id:`${expenseId.value}`,
+            
             amount: `${expenseAmount.value}`,
             description: `${expenseDescription.value}`,
             category: `${expenseCategory.value}`
@@ -37,36 +37,19 @@ async function addExpense() {
 
         const response = await axios.post(`http://localhost:3000/add-expense-details`, expenseDetails)
 
-        let expenseDetailsHTML = `<li id=${response.data.id}>${response.data.amount}-${response.data.category}-${response.data.description} <input type='button' class='btn btn-outline-success btn-sm mx-1 edit' value='Edit'>  <input type='button' class='btn btn-outline-danger btn-sm mx-1 delete' value='Delete'> </li>`
+        let expenseDetailsHTML = 
+        `<li id=${response.data.id}>
+        ${response.data.amount}-${response.data.category}-${response.data.description} 
+        <button class='btn btn-outline-success btn-sm mx-1 edit' >Edit</button>
+        <button class='btn btn-outline-danger btn-sm mx-1 delete'>Delete</button>    
+        </li>`
 
-        //check is there any expense details with this id available on screen
-        //if yes, replace it 
 
-        const expenseList=Array.from(document.getElementById('expense-list').children)
-        console.log(expenseList);
+        document.getElementById('expense-list').insertAdjacentHTML('beforeend', expenseDetailsHTML)
 
-        let elementFound=false;
 
-        expenseList.forEach((element)=>{
-
-            if(element.id==response.data.id)
-            {
-                elementFound=true;
-                element.firstChild.textContent=`${response.data.amount}-${response.data.category}-${response.data.description}`
-            }
-        })
-
-        console.log(elementFound)
-
-        //if there is no any expense details present with this id then add this new expense details at last
-
-        if(!elementFound){
-            document.getElementById('expense-list').insertAdjacentHTML('beforeend', expenseDetailsHTML)
-        }
-       
         // make all the input values to default 
 
-        document.getElementById('expense-id').value = ""
         document.getElementById('expense-amount').value = ""
         document.getElementById('expense-description').value = ""
         document.getElementById('expense-category').value = ""
@@ -96,7 +79,11 @@ async function getAllExpensesFromServer() {
 
         expenseDetails.forEach((element) => {
 
-            let expenseDetailsHTML = `<li id=${element.id}> ${element.amount}-${element.category}-${element.description} <input type='button' class='btn btn-outline-success btn-sm mx-1 edit' value='Edit'>  <input type='button' class='btn btn-outline-danger btn-sm mx-1 delete' value='Delete'> </li>`
+            let expenseDetailsHTML = `<li id=${element.id}>
+            ${element.amount}-${element.category}-${element.description} 
+            <button class='btn btn-outline-success btn-sm mx-1 edit' >Edit</button>
+            <button class='btn btn-outline-danger btn-sm mx-1 delete'>Delete</button> 
+            </li>`
 
             document.getElementById('expense-list').insertAdjacentHTML('beforeend', expenseDetailsHTML)
 
@@ -152,6 +139,8 @@ async function editExpense(e) {
 
             const response = await axios.get(`http://localhost:3000/expense-details/${id}`)
             console.log(response.data)
+            window.location = `/edit-expense-page?id=${id}`
+            console.log('ssss')
             document.getElementById('expense-id').value = response.data.id
             document.getElementById('expense-amount').value = response.data.amount;
             document.getElementById('expense-description').value = response.data.description

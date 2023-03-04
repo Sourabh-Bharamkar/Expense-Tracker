@@ -7,7 +7,7 @@ exports.getHomePage = (req, res, next) => {
 }
 
 exports.postAddExpenseDetails = (req, res, next) => {
-  if (req.body.id == null) {
+  
     Expense.create({
       amount: req.body.amount,
       description: req.body.description,
@@ -16,23 +16,11 @@ exports.postAddExpenseDetails = (req, res, next) => {
       console.log(response)
       res.json(response)
 
+    }).catch((error)=>{
+      console.log(error)
     })
-  }
-  else {
-    Expense.findByPk(req.body.id)
-      .then((response) => {
-        response.amount = req.body.amount;
-        response.description = req.body.description;
-        response.category = req.body.category;
-        response.save();
-        res.json(response);
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-
-  }
-
+  
+ 
 }
 
 exports.getExpenses = (req, res, next) => {
@@ -62,9 +50,21 @@ exports.getDeleteExpense = (req, res, next) => {
 
 }
 
-exports.getEditExpense = (req, res, next) => {
+exports.postEditExpense = (req, res, next) => {
 
-  res.redirect('/edit-expense-page')
+  const id = req.params.id;
+  Expense.findByPk(id)
+    .then((response) => {
+      response.amount = req.body.amount;
+      response.description = req.body.description;
+      response.category = req.body.category;
+      response.save();
+      res.json(response);
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
 
 }
 
