@@ -1,6 +1,7 @@
 
 const loginForm = document.getElementById('login-form')
 
+//adding event listener to login form on submit
 loginForm.addEventListener('submit', login)
 
 
@@ -14,22 +15,19 @@ async function login(e) {
         const password = document.getElementById('password').value;
 
         const userDetails = {
-            name: name,
             email: email,
             password: password
         }
 
-       
         // verify the email id and password
-        console.log('hi')
-        
+       
         const response = await axios.post('http://localhost:3000/user/verify', userDetails)
         const existUser=response.data;
 
-        console.log(existUser)
-
         if (!existUser) {
-            window.alert(`An account does not exist with this email`)
+            window.alert(`User not found!`)
+            clearInputFields();
+
             return;
         }
 
@@ -46,6 +44,8 @@ async function login(e) {
 
         clearInputFields();
 
+        window.alert('User login successful')
+        
     }
     catch {
         (error) => {
@@ -57,7 +57,7 @@ async function login(e) {
 
 //function to cleat input fields
 function clearInputFields() {
-    document.getElementById('name').value = ""
+    
     document.getElementById('email').value = ""
     document.getElementById('password').value = ""
 

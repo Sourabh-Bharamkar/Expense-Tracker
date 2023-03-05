@@ -35,7 +35,6 @@ async function signup(e) {
 
     
         // verify if there any user exists with same email id
-        console.log('hi')
         
         const response = await axios.post('http://localhost:3000/user/verify', userDetails)
         const existUser=response.data;
@@ -43,7 +42,8 @@ async function signup(e) {
         console.log(existUser)
 
         if (existUser) {
-            window.alert('An account with this email already exists.Please use another email')
+            window.alert('An account with this email already exists. You can try logging in with this email.')
+            clearInputFields()
             return;
         }
 
@@ -51,6 +51,10 @@ async function signup(e) {
         axios.post('http://localhost:3000/user/signup', userDetails)
 
         clearInputFields();
+
+        window.alert('Account created successfully!! Please login to your account.')
+
+        window.location='/user/login'
 
     }
     catch {
