@@ -5,22 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="/css/signup.css">
+    <title>Login In</title>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
 
-    <div class="signup-box">
-        <h1>Create Account</h1>
+    <div class="login-box">
+        <h1>Login</h1>
 
-        <form id="signup-form">
-            <div class="input-field">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                <br>
-                <span class="error" name="name-error" id="name-error"></span>
-            </div>
-
+        <form id="login-form">
+         
             <div class="input-field">
                 <input type="email" id="email" name="email" placeholder="Your Email" required>
                 <br>
@@ -34,16 +29,16 @@
             </div>
 
             <div class="button-field">
-                <button type="submit" name="signup-btn" id="signup-btn">Sign Up</button>
+                <button type="submit" name="signup-btn" id="signup-btn">Login</button>
             </div>
 
         </form>
         <p>
-            Have already an account?
-            <a href="/user/login">Login here</a>
+            Don't have an account yet?
+            <a href="/user/signup">Sign Up </a>
         </p>
     </div>
-<script src="/js/signup.js"></script>
+<script src="/js/login.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 

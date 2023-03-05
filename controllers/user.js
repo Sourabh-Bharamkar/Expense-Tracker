@@ -37,3 +37,7 @@ exports.postSignupUser = (req, res, next) => {
         })
 
 }
+
+exports.getLoginPage=(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'../','views/login.html'))
+}
