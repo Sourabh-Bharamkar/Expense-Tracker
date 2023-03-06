@@ -20,32 +20,32 @@ async function login(e) {
         }
 
         // verify the email id and password
-       
-        const response = await axios.post('http://localhost:3000/user/verify', userDetails)
-        const existUser=response.data;
 
-        if (!existUser) {
+        const response = await axios.post('http://localhost:3000/user/login/verify', userDetails)
+
+        console.log(response.data)
+        console.log(response.data.message)
+        
+        if (response.data.message == 'user not found') {
             window.alert(`User not found!`)
             clearInputFields();
 
             return;
         }
-
-        if(response.data.password!=password){
-            document.getElementById('password-error').textContent = "* Your email and password do not match. Please try again."
+        
+        if (response.data.message == 'password is incorrect') {
+            document.getElementById('password-error').textContent = "* Password is incorrect"
 
             setTimeout(() => {
                 document.getElementById('password-error').textContent = ""
             }, 5000)
+
+            return;
         }
 
-        //create an account 
-        axios.post('http://localhost:3000/user/login', userDetails)
-
+        window.alert('Login successful!!')
         clearInputFields();
 
-        window.alert('User login successful')
-        
     }
     catch {
         (error) => {
@@ -57,7 +57,7 @@ async function login(e) {
 
 //function to cleat input fields
 function clearInputFields() {
-    
+
     document.getElementById('email').value = ""
     document.getElementById('password').value = ""
 

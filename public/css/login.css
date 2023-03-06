@@ -18,10 +18,10 @@ body{
 
 input{
     width: 100%;
-    padding: 10px;
+    padding: 13px;
     border-radius: 5px;
     border: 1px solid#CACACA;
-    font-size: small;
+    font-size: medium;
     box-sizing: border-box;
     outline: none;
 }
@@ -40,7 +40,7 @@ input{
 
 button{
     width: 100%;
-    padding: 10px;
+    padding: 13px;
     border-radius: 5px;
     font-size: medium;
     color: white;

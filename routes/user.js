@@ -6,8 +6,10 @@ router.get('/user/signup',userController.getSignupPage)
 
 router.post('/user/signup',userController.postSignupUser)
 
-router.post('/user/verify',userController.postVerifyUser)
+router.post('/user/signup/verify',userController.postVerifyEmail)
 
 router.get('/user/login',userController.getLoginPage)
+
+router.post('/user/login/verify',userController.postVerifyLogin)
 
 module.exports=router;
