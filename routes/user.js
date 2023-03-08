@@ -12,4 +12,7 @@ router.get('/user/login',userController.getLoginPage)
 
 router.post('/user/login/verify',userController.postVerifyLogin)
 
+router.get('/user/expense',userController.getUserExpense)
+
+
 module.exports=router;

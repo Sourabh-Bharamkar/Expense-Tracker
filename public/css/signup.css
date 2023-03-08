@@ -18,10 +18,12 @@ body{
 
 input{
     width: 100%;
-    padding: 13px;
-    border-radius: 5px;
+    padding: 10px;
     border: 1px solid#CACACA;
-    font-size:medium;
+    border: none;
+    border-bottom: 1px solid#CACACA;
+    margin-top:20px ;
+    font-size: medium;
     box-sizing: border-box;
     outline: none;
 }
@@ -34,7 +36,7 @@ input{
 
 .button-field {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 40px;
     
 }
 

@@ -6,65 +6,74 @@ exports.getHomePage = (req, res, next) => {
   res.sendFile(path.join(__dirname, '../', 'views/index.html'))
 }
 
-exports.postAddExpenseDetails = (req, res, next) => {
-  console.log('inside postAddExpenseDetails controller')
-    Expense.create({
+
+exports.postAddExpenseDetails = async (req, res, next) => {
+
+  try {
+    console.log('inside postAddExpenseDetails controller')
+
+    const expense = await Expense.create({
+
       amount: req.body.amount,
       description: req.body.description,
+      date: req.body.date,
       category: req.body.category
-    }).then((response) => {
-      // console.log(response)
-      res.json(response)
+    })
 
-    }).catch((error)=>{
+    // console.log(response)
+    res.json(expense)
+
+  } catch (error){ 
       console.log(error)
-    })
-  
- 
-}
-
-exports.getExpenses = (req, res, next) => {
-
-  Expense.findAll()
-    .then((result) => {
-      console.log('entered into getExpenses controller')
-      // console.log(result)
-      res.json(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-
-exports.getDeleteExpense = (req, res, next) => {
-  const id = req.params.id;
-  Expense.findByPk(id)
-    .then((response) => {
-      response.destroy();
-      res.json();
-
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  }
 
 }
 
-exports.postEditExpense = (req, res, next) => {
+exports.getExpenses = async (req, res, next) => {
 
-  const id = req.params.id;
-  Expense.findByPk(id)
-    .then((response) => {
-      response.amount = req.body.amount;
-      response.description = req.body.description;
-      response.category = req.body.category;
-      response.save();
-      res.json(response);
-    })
-    .catch((error) => {
+  try {
+    const expenses = await Expense.findAll()
+    console.log('entered into getExpenses controller')
+    // console.log(result)
+    res.json(expenses)
+
+  } catch(error) {
       console.log(error)
-    })
+  }
 
+}
+
+exports.getDeleteExpense = async (req, res, next) => {
+
+  try {
+    const id = req.params.id;
+    const expense = await Expense.findByPk(id)
+    expense.destroy();
+    res.json({ message: 'deleted the expense' });
+
+  } catch(error) {
+      console.log(error)
+  }
+
+}
+
+exports.postEditExpense = async (req, res, next) => {
+
+  try {
+    console.log('entered into postEditExpense controller')
+    const id = req.body.id;
+    console.log(id)
+    const expense = await Expense.findByPk(id)
+    expense.amount = req.body.amount;
+    expense.description = req.body.description;
+    expense.category = req.body.category;
+    expense.save();
+    res.json(expense);
+
+  } catch (error) {
+    console.log(error)
+
+  }
 
 }
 
@@ -74,15 +83,15 @@ exports.getEditExpensePage = (req, res, next) => {
 }
 
 
-exports.getExpenseDetails = (req, res, next) => {
+exports.getExpenseDetails = async (req, res, next) => {
 
-  const id = req.params.id;
+  try {
+    const id = req.params.id;
+    const expense = await Expense.findByPk(id)
+    res.json(expense)
 
-  Expense.findByPk(id)
-    .then((response) => {
-      res.json(response)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  } catch (error) {
+    console.log(error)
+  }
+
 }

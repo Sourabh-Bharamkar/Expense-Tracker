@@ -18,6 +18,11 @@ const Expense = sequelize.define('expense', {
         allowNull:false
 
     },
+    date:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+
     category:{
         type:Sequelize.STRING,
         allowNull:false

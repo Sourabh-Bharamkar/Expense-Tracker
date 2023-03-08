@@ -19,8 +19,10 @@ body{
 input{
     width: 100%;
     padding: 13px;
-    border-radius: 5px;
     border: 1px solid#CACACA;
+    border: none;
+    border-bottom: 1px solid#CACACA;
+    margin-top:20px ;
     font-size: medium;
     box-sizing: border-box;
     outline: none;
@@ -40,8 +42,8 @@ input{
 
 button{
     width: 100%;
-    padding: 13px;
-    border-radius: 5px;
+    padding: 10px;
+    margin-top: 30px;
     font-size: medium;
     color: white;
     box-sizing: border-box;

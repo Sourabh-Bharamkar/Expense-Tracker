@@ -13,7 +13,7 @@ router.get('/expense-details/:id',expenseController.getExpenseDetails)
 
 router.get('/delete-expense/:id',expenseController.getDeleteExpense)
 
-router.post('/edit-expense/:id',expenseController.postEditExpense)
+router.post('/edit-expense',expenseController.postEditExpense)
 
 router.get('/edit-expense-page',expenseController.getEditExpensePage)
 

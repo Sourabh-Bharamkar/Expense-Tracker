@@ -9,7 +9,7 @@ async function login(e) {
 
     try {
 
-        e.preventDefault()
+        e.preventDefault();
         // get the form input values
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
@@ -25,14 +25,14 @@ async function login(e) {
 
         console.log(response.data)
         console.log(response.data.message)
-        
+
         if (response.data.message == 'user not found') {
             window.alert(`User not found!`)
             clearInputFields();
 
             return;
         }
-        
+
         if (response.data.message == 'password is incorrect') {
             document.getElementById('password-error').textContent = "* Password is incorrect"
 
@@ -45,12 +45,21 @@ async function login(e) {
 
         window.alert('Login successful!!')
         clearInputFields();
+        window.location = '/user/expense'
 
     }
-    catch {
-        (error) => {
-            console.log(error)
+    catch (error) {
+
+        if (error.response.data.message == 'password is incorrect') {
+            document.getElementById('password-error').textContent = "* Password is incorrect"
+
+            setTimeout(() => {
+                document.getElementById('password-error').textContent = ""
+            }, 5000)
+            document.getElementById('password').value = "";
+            return;
         }
+
     }
 
 }

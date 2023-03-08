@@ -2,9 +2,11 @@ const path = require('path')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
+
 exports.getSignupPage = (req, res, next) => {
     res.sendFile(path.join(__dirname, '../', 'views/signup.html'))
 }
+
 
 exports.postVerifyEmail = async (req, res, next) => {
     try {
@@ -22,15 +24,15 @@ exports.postVerifyEmail = async (req, res, next) => {
 
         }
 
+    } catch (error) {
 
-    } catch {
-        (error) => {
-            console.log(error)
-        }
+        console.log(error)
+
     }
 
-
 }
+
+
 
 exports.postSignupUser = async (req, res, next) => {
 
@@ -48,14 +50,13 @@ exports.postSignupUser = async (req, res, next) => {
             res.status(201).json({ message: 'Account created successfully' })
         })
 
-    } catch {
-        (err) => {
+    } catch (error) {
 
-            res.json(err);
-        }
+        res.json(error);
     }
 
 }
+
 
 exports.getLoginPage = (req, res, next) => {
     res.sendFile(path.join(__dirname, '../', 'views/login.html'))
@@ -69,28 +70,30 @@ exports.postVerifyLogin = async (req, res, next) => {
         const users = await User.findAll({ where: { email: email } })
 
         if (users.length == 0) {
-            res.json({ message: 'user not found' })
+           return res.json({ message: 'user not found' })
         }
         const user = users[0];
 
         bcrypt.compare(password, user.password, (err, match) => {
             console.log(match)
             if (!match) {
-
-                res.send({ message: 'password is incorrect' })
-
+                res.status(400).json({ message: 'password is incorrect' })
             }
             else {
-                res.status(200).json({ message: 'login successful' })
+                return res.status(200).json({ message: 'login successful' })
             }
 
         })
 
-    } catch {
-        (error) => {
+    } catch (error) {
 
-            res.json(error)
-        }
+        console.log(error)
+
     }
 
+}
+
+
+exports.getUserExpense = (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../', 'views/index.html'))
 }
