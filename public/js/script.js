@@ -3,12 +3,14 @@ let expenseBtn = document.getElementById('add-expense-btn')
 
 let expenseTable = document.getElementById('expense-table')
 
+//setting header common to all requests
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 
-// expenseBtn.addEventListener('click', addExpense)
 
-
+// adding event listener on form submit
 const addExpenseForm = document.getElementById('add-expense-form')
 addExpenseForm.addEventListener('submit', addExpense)
+
 
 //function to add expense details 
 //saving the expense details to database and showing it on screen too 
@@ -47,7 +49,7 @@ async function addExpense(e) {
         }
 
         console.log('inside add expense function')
-
+        const token = localStorage.getItem('token')
         const response = await axios.post(`http://localhost:3000/add-expense-details`, expenseDetails)
 
         console.log(response)
@@ -65,10 +67,10 @@ async function addExpense(e) {
         document.getElementById('expense-table-body').insertAdjacentHTML('beforeend', expenseDetailsHTML)
 
         //showing succcess message on form
-        document.getElementById('form-submit-message').textContent='Successfully added...'
-        setTimeout(()=>{
-            document.getElementById('form-submit-message').textContent=""
-        },3000)
+        document.getElementById('form-submit-message').textContent = 'Successfully added...'
+        setTimeout(() => {
+            document.getElementById('form-submit-message').textContent = ""
+        }, 3000)
 
         // make all the input values to default 
 
@@ -92,8 +94,8 @@ async function getAllExpensesFromServer() {
 
     try {
         console.log('entered into getAllExpensesFromServer ')
-        const response = await axios.get('http://localhost:3000/expenses')
-
+        const token = localStorage.getItem('token')
+        const response = await axios.get('http://localhost:3000/expenses' )
         let expenseDetails = response.data;
         console.log(response.data)
         expenseDetails.forEach((element) => {
@@ -114,6 +116,7 @@ async function getAllExpensesFromServer() {
     } catch (error) {
 
         console.log(error)
+        
 
     }
 
@@ -185,22 +188,21 @@ async function editExpense(e) {
         e.preventDefault();
 
         const expenseDetails = {
-            id:document.getElementById('edit-expense-id').value,
+            id: document.getElementById('edit-expense-id').value,
             amount: document.getElementById('edit-expense-amount').value,
             description: document.getElementById('edit-expense-description').value,
             category: document.getElementById('edit-expense-category').value
         }
 
         const response1 = await axios.post(`http://localhost:3000/edit-expense`, expenseDetails)
-        const updatedExpenseDetails=response1.data;
+        const updatedExpenseDetails = response1.data;
 
         //edit corresponding expense item from screen too
-        const expenseTableBodyElements=document.getElementById('expense-table-body').children
+        const expenseTableBodyElements = document.getElementById('expense-table-body').children
 
-        Array.from(expenseTableBodyElements).forEach((element)=>{
-            if(element.id==response1.data.id)
-            {
-                element.innerHTML=`<td>${updatedExpenseDetails.amount}</td> 
+        Array.from(expenseTableBodyElements).forEach((element) => {
+            if (element.id == response1.data.id) {
+                element.innerHTML = `<td>${updatedExpenseDetails.amount}</td> 
                 <td>${updatedExpenseDetails.description}</td>
                 <td>${updatedExpenseDetails.date}</td>
                 <td>${updatedExpenseDetails.category}</td> 

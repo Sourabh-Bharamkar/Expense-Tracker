@@ -33,17 +33,8 @@ async function login(e) {
             return;
         }
 
-        if (response.data.message == 'password is incorrect') {
-            document.getElementById('password-error').textContent = "* Password is incorrect"
-
-            setTimeout(() => {
-                document.getElementById('password-error').textContent = ""
-            }, 5000)
-
-            return;
-        }
-
         window.alert('Login successful!!')
+        localStorage.setItem('token',response.data.token)
         clearInputFields();
         window.location = '/user/expense'
 

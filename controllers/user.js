@@ -1,6 +1,7 @@
 const path = require('path')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
+const jwt=require('jsonwebtoken')
 
 
 exports.getSignupPage = (req, res, next) => {
@@ -62,6 +63,12 @@ exports.getLoginPage = (req, res, next) => {
     res.sendFile(path.join(__dirname, '../', 'views/login.html'))
 }
 
+
+function generateAccessToken(id,name){
+    return jwt.sign({userId:id,name:name},'Sourabh@8989')
+}
+
+
 exports.postVerifyLogin = async (req, res, next) => {
 
     try {
@@ -80,7 +87,7 @@ exports.postVerifyLogin = async (req, res, next) => {
                 res.status(400).json({ message: 'password is incorrect' })
             }
             else {
-                return res.status(200).json({ message: 'login successful' })
+                return res.status(200).json({ message: 'login successful',token:generateAccessToken(user.id,user.name) })
             }
 
         })
