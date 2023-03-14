@@ -34,7 +34,6 @@ exports.postVerifyEmail = async (req, res, next) => {
 }
 
 
-
 exports.postSignupUser = async (req, res, next) => {
 
     try {
@@ -103,4 +102,15 @@ exports.postVerifyLogin = async (req, res, next) => {
 
 exports.getUserExpense = (req, res, next) => {
     res.sendFile(path.join(__dirname, '../', 'views/index.html'))
+}
+
+exports.getIsPrimiumUser=(req,res,next)=>{
+ 
+    if(req.user.isPremiumMember==true){
+        res.status(200).json({isPremium:true})
+    }
+    else{
+        res.status(200).json({isPremium:false})
+    }
+
 }

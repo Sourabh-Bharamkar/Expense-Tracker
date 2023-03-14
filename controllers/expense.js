@@ -1,4 +1,3 @@
-const express = require('express')
 const path = require('path')
 const Expense = require('../models/expense')
 
@@ -34,6 +33,8 @@ exports.postAddExpenseDetails = async (req, res, next) => {
 exports.getExpenses = async (req, res, next) => {
 
   try {
+    console.log('Entered into getExpense Controller')
+    console.log(req.user)
     const expenses = await req.user.getExpenses();//
     console.log('entered into getExpenses controller')
     // console.log(result)
@@ -74,6 +75,7 @@ exports.postEditExpense = async (req, res, next) => {
     console.log(id);
     const user = req.user;
     const expense = await Expense.findByPk(id)
+
     if (user.id == expense.userId) {
       expense.amount = req.body.amount;
       expense.description = req.body.description;
@@ -81,7 +83,7 @@ exports.postEditExpense = async (req, res, next) => {
       expense.save();
       res.json(expense);
     }
-    else{
+    else {
       res.status(403).json({ message: 'autherization error' })
     }
 
