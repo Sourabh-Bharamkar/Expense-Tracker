@@ -15,13 +15,17 @@ async function showLeaderboard() {
         const response = await axios.get('http://localhost:3000/premium/show_leaderboard')
 
         console.log(response)
+        let rank=1
         response.data.forEach((user) => {
 
             let userDetails = `<tr>
+        <td>${rank}</td>
         <td>${user.name}</td>
-        <td>${user.total_expense}</td>
+        <td>${user.totalExpense}</td>
         </tr>`
 
+        //increment the rank
+        rank++;
             console.log(userDetails)
             document.getElementById('leaderboard-table-body').insertAdjacentHTML('beforeend', userDetails)
 
