@@ -118,3 +118,12 @@ exports.getExpenseDetails = async (req, res, next) => {
   }
 
 }
+
+exports.getAddExpensePage=(req,res,next)=>{
+  res.status(200).sendFile(path.join(__dirname,'../','views/add-expense.html'))
+}
+
+
+exports.getExpenseTable=(req,res,next)=>{
+  res.status(200).sendFile(path.join(__dirname,'../','views/expense-table.html'))
+}

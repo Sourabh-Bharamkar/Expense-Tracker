@@ -1,4 +1,4 @@
-
+const path=require('path')
 const { json } = require('body-parser');
 const Razorpay = require('razorpay')
 const Order = require('../models/order');
@@ -15,11 +15,13 @@ exports.getPremiumMembership = async (req, res, next) => {
             key_id: process.env.RAZORPAY_KEY_ID,
             key_secret: process.env.RAZORPAY_KEY_SECRET
         })
+        console.log(rzp.key_secret)
         const amount = 2500;
 
         rzp.orders.create({ amount: amount, currency: 'INR' }, (err, order) => {
 
             if (err) {
+                console.log('error occured while creating an orderid')
                 throw new Error(JSON.stringify(err))
             }
 
@@ -62,4 +64,9 @@ exports.postUpdateTransactionStatus = async (req, res, next) => {
     }
 
 
+}
+
+
+exports.getBuyPremiumMembershipPage=(req,res,next)=>{
+    res.status(200).sendFile(path.join(__dirname,'../','views/buy-premium.html'))
 }

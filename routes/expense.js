@@ -16,5 +16,8 @@ router.get('/delete-expense/:id',userAuthentication.authenticate,expenseControll
 
 router.post('/edit-expense',userAuthentication.authenticate,expenseController.postEditExpense)
 
+router.get('/add-expense',expenseController.getAddExpensePage)
+
+router.get('/expense-table',expenseController.getExpenseTable)
 
 module.exports=router;

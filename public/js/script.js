@@ -122,6 +122,7 @@ async function getAllExpensesFromServer() {
         if (response1.data.isPremium == true) {
             document.getElementById('buy-premium-btn').style.display = "none";
             document.getElementById('premium-user').style.display = "block";
+            document.getElementById('leaderboard-btn').style.display = "block";
 
         }
 
@@ -272,7 +273,7 @@ function modalDisplayOff(e) {
     }
 }
 
-
+//adding an event listener to buy premium button
 const buyPrimiumBtn = document.getElementById('buy-premium-btn')
 
 buyPrimiumBtn.addEventListener('click', buyPremiumMembership)
@@ -320,3 +321,30 @@ async function buyPremiumMembership(e) {
     }
 }
 
+
+// adding an eventlistener to show leaderboard button 
+
+const leaderboardBtn=document.getElementById('leaderboard-btn')
+
+leaderboardBtn.addEventListener('click',showLeaderboard)
+
+async function showLeaderboard(){
+
+    const leaderboard_table=document.getElementById('leaderboard-table')
+
+
+    const response= await axios.get('http://localhost:3000/premium/show_leaderboard')
+
+    response.data.forEach((user)=>{
+
+        let userDetails=`<tr>
+        <td>${user.name}</td>
+        <td>${user.total_expense}</td>
+        </tr>`
+
+        console.log(userDetails)
+        document.getElementById('leaderboard-table-body').insertAdjacentHTML('beforeend',userDetails)
+        
+    })
+    
+}

@@ -11,8 +11,8 @@ async function login(e) {
 
         e.preventDefault();
         // get the form input values
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
 
         const userDetails = {
             email: email,
@@ -36,7 +36,7 @@ async function login(e) {
         window.alert('Login successful!!')
         localStorage.setItem('token',response.data.token)
         clearInputFields();
-        window.location = '/user/expense'
+        window.location = '/add-expense'
 
     }
     catch (error) {
@@ -47,7 +47,7 @@ async function login(e) {
             setTimeout(() => {
                 document.getElementById('password-error').textContent = ""
             }, 5000)
-            document.getElementById('password').value = "";
+            document.getElementById('login-password').value = "";
             return;
         }
 
@@ -58,7 +58,18 @@ async function login(e) {
 //function to cleat input fields
 function clearInputFields() {
 
-    document.getElementById('email').value = ""
-    document.getElementById('password').value = ""
+    document.getElementById('login-email').value = ""
+    document.getElementById('login-password').value = ""
 
 }
+
+
+//after clicking on signup here link,open signup modal
+document.getElementById('signup-here-link').addEventListener('click',(e)=>{
+    e.preventDefault()
+    //close the login modal and open signup modal
+    const loginModal = document.getElementById('login-modal')
+    const signupModal=document.getElementById('signup-modal')
+    loginModal.style.display='none'
+    signupModal.style.display='block';
+})

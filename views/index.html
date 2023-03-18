@@ -4,71 +4,79 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add Expense</title>
+    <title>Home Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/index.css">
+
 </head>
 
 <body>
 
-    <header>
+    <header class="header">
+
+
+        <div class="logo"><img src="/images/expenses.png" alt=""> EXPENSE TRACKER</div>
+        <div class="buttons">
+            <button id="header-signup-btn" class="signup-btn">Sign Up</button>
+            <button id="header-login-btn" class="login-btn">Login</button>
+        </div>
 
     </header>
 
 
     <main>
-        <!-- Trigger/Open The Modal -->
-        <button id="myBtn">Add Expense</button>
-        <span id="premium-user">You are Premium User</span>
-        <button id="buy-premium-btn">Buy Premium</button>
 
+        <div id="homepage-background">
+            <div id="homepage-background-text">
+                <h1>Expense Tracker</h1> <br><br>
+                <h2 >simple, intuitive, stable and feature-rich app</h2><br>
+                <span >Expenses Manager is a user-friendly, finance management app which allows you to keep track of your transactions seamlessly and intuitively. You can categorize your spending, create budgets, get detailed analysis of your spending habits and stay on top of your money.</span>
+            </div>
+            <!-- <div id="homepage-background-image"><img src="/images/expense-resources.png" alt=""></div> -->
+            <div id="homepage-background-image"><img src="/images/expense-guide-banner.png" alt=""></div>
+        </div>
 
-        <!-- The modal for add expense button -->
-        <div id="add-expense-modal" class="modal">
+        <!-- The modal for login button  -->
+        <div id="login-modal" class="modal">
 
             <!-- Modal content -->
             <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Add your expense </h2>
-                    <span class="close">&times;</span>
-                    <br>
-                </div>
 
-                <div class="form-submit-message">
-                    <span id="form-submit-message" > </span>
-                 </div>
+                <div class="modal-header">
+                    <h2>Login </h2>
+                    <span class="close">&times;</span>
+                </div>
 
                 <div class="modal-body">
                     <div class="form-container">
-                        <form action="" id="add-expense-form">
 
-                            <div class="">
-                                <input type="number" class="" name="expense-amount" id="expense-amount" required
-                                    placeholder="Expense Amount">
-                            </div>
 
-                            <div class="">
-                                <input type="text" class="" id="expense-description" required placeholder="Description">
-                            </div>
+                        <form id="login-form">
 
-                            <div class="">
-                                <select class="" id="expense-category" aria-placeholder="select" required>
-                                    <option value="" disabled selected hidden>Choose Category</option>
-                                    <option value="Fuel">Fuel</option>
-                                    <option value="Food">Food</option>
-                                    <option value="Electricity">Electricity</option>
-                                    <option value="Movie">Movie</option>
-                                    <option value="Health">Health and personal care</option>
-                                </select>
-                            </div>
-
-                            <div class="">
+                            <div class="input-field">
+                                <input type="email" id="login-email" name="email" placeholder="Your Email" required>
                                 <br>
-                                <button type="submit" class="" id="add-expense-btn">Add Expense</button>
+                                <span class="error" name="email-error" id="email-error"></span>
+                            </div>
+
+                            <div class="input-field">
+                                <input type="password" id="login-password" name="password" placeholder="Password"
+                                    required>
+                                <br>
+                                <span class="error" name="password-error" id="password-error"></span>
+                            </div>
+
+                            <div class="button-field">
+                                <button type="submit" name="login-btn" id="login-btn">Login</button>
                             </div>
 
                         </form>
+                        <p>
+                            Don't have an account yet?
+                            <a id="signup-here-link" href="">Sign Up </a>
+                        </p>
                     </div>
 
                 </div>
@@ -79,52 +87,49 @@
         </div>
 
 
-
-        <!-- The modal for edit button  -->
-        <div id="edit-expense-modal" class="modal">
+        <!-- The modal for signup button  -->
+        <div id="signup-modal" class="modal">
 
             <!-- Modal content -->
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h2>Edit your expense </h2>
+                    <h2>Sign Up </h2>
                     <span class="close">&times;</span>
                 </div>
 
                 <div class="modal-body">
                     <div class="form-container">
-                        <form action="" id="edit-expense-form">
-                            <div class="">
-                                <input type="text" class="" name="expense-id" id="edit-expense-id" hidden>
-                            </div>
 
-                            <div class="">
-                                <input type="number" class="" name="expense-amount" id="edit-expense-amount" required
-                                    placeholder="Expense Amount">
-                            </div>
-
-                            <div class="">
-                                <input type="text" class="" id="edit-expense-description" required
-                                    placeholder="Description">
-                            </div>
-
-                            <div class="">
-                                <select class="" id="edit-expense-category" aria-placeholder="select" required>
-                                    <option value="" disabled selected hidden>Choose Category</option>
-                                    <option value="Fuel">Fuel</option>
-                                    <option value="Food">Food</option>
-                                    <option value="Electricity">Electricity</option>
-                                    <option value="Movie">Movie</option>
-                                    <option value="Health">Health and personal care</option>
-                                </select>
-                            </div>
-
-                            <div class="">
+                        <form id="signup-form">
+                            <div class="input-field">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
                                 <br>
-                                <button type="submit" class="" id="edit-expense-btn">Edit Expense</button>
+                                <span class="error" name="name-error" id="name-error"></span>
+                            </div>
+
+                            <div class="input-field">
+                                <input type="email" id="signup-email" name="email" placeholder="Your Email" required>
+                                <br>
+                                <span class="error" name="email-error" id="email-error"></span>
+                            </div>
+
+                            <div class="input-field">
+                                <input type="password" id="signup-password" name="password" placeholder="Password"
+                                    required>
+                                <br>
+                                <span class="error" name="password-error" id="password-error"></span>
+                            </div>
+
+                            <div class="button-field">
+                                <button type="submit" name="signup-btn" id="signup-btn">Sign Up</button>
                             </div>
 
                         </form>
+                        <p>
+                            Have already an account?
+                            <a id="login-here-link" href="">Login here</a>
+                        </p>
                     </div>
 
                 </div>
@@ -134,27 +139,10 @@
 
         </div>
 
-        <!-- expense list table  -->
-
-        <table class="expense-table" id="expense-table">
-            <thead id="expense-table-head">
-                <tr>
-                    <th class="amount"> Amount</th>
-                    <th class="description"> Description</th>
-                    <th class="date"> Expense Date</th>
-                    <th class="category"> Category</th>
-                    <th class="action">Action</th>
-                </tr>
-            </thead>
-            <tbody id="expense-table-body">
-
-            </tbody>
-
-        </table>
     </main>
 
     <footer>
-        
+
     </footer>
 
 
@@ -163,7 +151,9 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script src="/js/script.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/signup.js"></script>
 
 </body>
 
