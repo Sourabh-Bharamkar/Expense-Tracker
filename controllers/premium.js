@@ -1,56 +1,32 @@
 const User = require('../models/user')
 const Expense = require('../models/expense')
-const path=require('path')
+const path = require('path')
+const sequelize = require('../util/database')
 
 exports.getShowLeaderboard = async (req, res, next) => {
-   try{
+    try {
 
-    const expenses=await Expense.findAll()
-    const users=await User.findAll();
+        const leaderboardOfUsers = await User.findAll({
 
-    const userIdWithTotalExpense={};
-    const userNameWithTotalExpense=[];
+            attributes: ['id', 'name', [sequelize.fn('sum', sequelize.col('expenses.amount')), 'total_expense']],
 
-    expenses.forEach((expense)=>{
+            include: [{
+                model: Expense,
+                attributes: []
+            }],
+            group: ['user.id'],
+            order: [['total_expense', 'DESC']]
 
-        if(userIdWithTotalExpense[expense.userId])
-        {
-            userIdWithTotalExpense[expense.userId]+=expense.amount;
-        }
-        else{
-            userIdWithTotalExpense[expense.userId]=expense.amount;
-        }
-    })
+        })
 
-    users.forEach((user)=>{
-       
-        if(userIdWithTotalExpense[user.id]==undefined)
-        {
-            
-            userNameWithTotalExpense.push({name:user.name, total_expense:0})
-        }
-        else{
-            
-            userNameWithTotalExpense.push({name:user.name, total_expense:userIdWithTotalExpense[user.id]})
-        }
-        
-    })
+        res.status(200).json(leaderboardOfUsers)
 
-   
-
-    userNameWithTotalExpense.sort((a,b)=>{
-        return b.total_expense-a.total_expense;
-    })
-
-    console.log(userNameWithTotalExpense)
-    res.status(200).json(userNameWithTotalExpense)
-
-   }catch(error){
-    console.log(error)
-   }
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
-exports.getLeaderboardPage=(req,res,next)=>{
-    res.status(200).sendFile(path.join(__dirname,'../','views/leaderboard.html'))
+exports.getLeaderboardPage = (req, res, next) => {
+    res.status(200).sendFile(path.join(__dirname, '../', 'views/leaderboard.html'))
 }
