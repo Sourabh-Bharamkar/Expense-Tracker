@@ -68,7 +68,7 @@ async function deleteExpense(e) {
             if (response) {
 
                 let id = e.target.parentNode.parentNode.id;
-                const response = await axios.get(`http://localhost:3000/delete-expense/${id}`)
+                const response = await axios.post(`http://localhost:3000/delete-expense`,{id:id})
 
                 // delete target element from screen also
                 e.target.parentNode.parentNode.remove();
@@ -132,6 +132,7 @@ async function editExpense(e) {
         const response1 = await axios.post(`http://localhost:3000/edit-expense`, expenseDetails)
         const updatedExpenseDetails = response1.data;
 
+        console.log(response1)
         //edit corresponding expense item from screen too
         const expenseTableBodyElements = document.getElementById('expense-table-body').children
 

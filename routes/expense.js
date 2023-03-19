@@ -12,7 +12,7 @@ router.get('/expenses', userAuthentication.authenticate, expenseController.getEx
 
 router.get('/expense-details/:id',userAuthentication.authenticate,expenseController.getExpenseDetails)
 
-router.get('/delete-expense/:id',userAuthentication.authenticate,expenseController.getDeleteExpense)
+router.post('/delete-expense',userAuthentication.authenticate,expenseController.postDeleteExpense)
 
 router.post('/edit-expense',userAuthentication.authenticate,expenseController.postEditExpense)
 

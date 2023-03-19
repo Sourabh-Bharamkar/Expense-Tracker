@@ -1,6 +1,7 @@
 const path=require('path')
 const { json } = require('body-parser');
 const Razorpay = require('razorpay')
+const sequelize=require('../util/database')
 const Order = require('../models/order');
 const User = require('../models/user');
 const dotenv = require('dotenv')
@@ -41,15 +42,19 @@ exports.getPremiumMembership = async (req, res, next) => {
 
 exports.postUpdateTransactionStatus = async (req, res, next) => {
 
+    //initiate transaction 
+    const t=await sequelize.transaction();
+
     try {
         const { order_id, payment_id, status, isPremiumMember } = req.body;
 
         const order = await Order.findOne({ where: { orderId: order_id } })
 
-        const promise1 = order.update({ paymentId: payment_id, status: status });
-        const promise2 = req.user.update({ isPremiumMember: isPremiumMember });
+        const promise1 = order.update({ paymentId: payment_id, status: status },{transaction:t});
+        const promise2 = req.user.update({ isPremiumMember: isPremiumMember },{transaction:t});
 
         const response = await Promise.all([promise1, promise2])
+        await t.commit();
         if (status == 'SUCCESSFUL') {
             res.status(200).json({ message: 'transaction successful' })
         }
@@ -59,11 +64,11 @@ exports.postUpdateTransactionStatus = async (req, res, next) => {
 
 
     } catch (error) {
+        await t.rollback();
         console.log(error)
+        res.status(500).json({message:'failed to update transaction status'})
 
     }
-
-
 }
 
 
