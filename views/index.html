@@ -31,12 +31,15 @@
         <div id="homepage-background">
             <div id="homepage-background-text">
                 <h1>Expense Tracker</h1> <br><br>
-                <h2 >simple, intuitive, stable and feature-rich app</h2><br>
-                <span >Expenses Manager is a user-friendly, finance management app which allows you to keep track of your transactions seamlessly and intuitively. You can categorize your spending, create budgets, get detailed analysis of your spending habits and stay on top of your money.</span>
+                <h2>simple, intuitive, stable and feature-rich app</h2><br>
+                <span>Expenses Manager is a user-friendly, finance management app which allows you to keep track of your
+                    transactions seamlessly and intuitively. You can categorize your spending, create budgets, get
+                    detailed analysis of your spending habits and stay on top of your money.</span>
             </div>
             <!-- <div id="homepage-background-image"><img src="/images/expense-resources.png" alt=""></div> -->
             <div id="homepage-background-image"><img src="/images/expense-guide-banner.png" alt=""></div>
         </div>
+
 
         <!-- The modal for login button  -->
         <div id="login-modal" class="modal">
@@ -66,6 +69,11 @@
                                     required>
                                 <br>
                                 <span class="error" name="password-error" id="password-error"></span>
+
+                            </div><br>
+
+                            <div>
+                                <a id="forgot-password" href="">Forgot Password?</a>
                             </div>
 
                             <div class="button-field">
@@ -77,6 +85,45 @@
                             Don't have an account yet?
                             <a id="signup-here-link" href="">Sign Up </a>
                         </p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- The modal for forgot password link  -->
+        <div id="forgot-password-modal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h2>Recover Your Password </h2>
+                    <span class="close">&times;</span>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-container">
+
+                        <form id="forgot-password-form">
+
+                            <div class="input-field">
+                                <input type="email" id="forgot-password-email" placeholder="Enter your Email" required>
+                                <br>
+                                <span class="error" name="email-error" id="forgot-password-email-error"></span>
+                            </div>
+
+                            <div class="button-field">
+                                <button type="submit" id="forgot-password-form-submit-btn">Submit</button>
+                            </div>
+
+                        </form>
+
                     </div>
 
                 </div>

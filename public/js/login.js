@@ -34,7 +34,7 @@ async function login(e) {
         }
 
         window.alert('Login successful!!')
-        localStorage.setItem('token',response.data.token)
+        localStorage.setItem('token', response.data.token)
         clearInputFields();
         window.location = '/add-expense'
 
@@ -65,11 +65,55 @@ function clearInputFields() {
 
 
 //after clicking on signup here link,open signup modal
-document.getElementById('signup-here-link').addEventListener('click',(e)=>{
+document.getElementById('signup-here-link').addEventListener('click', (e) => {
     e.preventDefault()
     //close the login modal and open signup modal
     const loginModal = document.getElementById('login-modal')
-    const signupModal=document.getElementById('signup-modal')
-    loginModal.style.display='none'
-    signupModal.style.display='block';
+    const signupModal = document.getElementById('signup-modal')
+    loginModal.style.display = 'none'
+    signupModal.style.display = 'block';
 })
+
+
+// after clicking on forgot password link,open forgot-password modal
+
+const forgotPasswordLink = document.getElementById('forgot-password');
+
+forgotPasswordLink.addEventListener('click', openForgotPasswordModal)
+
+async function openForgotPasswordModal(e) {
+    try {
+        e.preventDefault();
+        //open modal for forget password and close the login modal
+         
+        const loginModal = document.getElementById('login-modal')
+        const forgotPassworddModal = document.getElementById('forgot-password-modal')
+        loginModal.style.display = 'none';
+        forgotPassworddModal.style.display='block';
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+// adding event listener to forgot password form on submit 
+
+const forgotPasswordForm=document.getElementById('forgot-password-form')
+
+forgotPasswordForm.addEventListener('submit',recoverPassword)
+
+async function recoverPassword(e){
+
+    try{
+        e.preventDefault();
+        const email=document.getElementById('forgot-password-email').value;
+        const response=axios.post('http://localhost:3000/user/password/forgot-password',{email:email})
+        
+
+    }catch(error){
+        console.log(error)
+    }
+
+}

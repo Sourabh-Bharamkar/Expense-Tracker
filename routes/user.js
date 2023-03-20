@@ -17,5 +17,7 @@ router.get('/user/expense',userController.getUserExpense)
 
 router.get('/user/is_premium',userAuthentication.authenticate,userController.getIsPrimiumUser)
 
+router.post('/user/password/forgot-password',userController.postForgotPassword)
+
 
 module.exports=router;

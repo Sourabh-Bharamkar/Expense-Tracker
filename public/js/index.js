@@ -54,6 +54,7 @@ async function openSignupFormModal(e){
 
 let loginModal = document.getElementById("login-modal");
 let signupModal = document.getElementById("signup-modal");
+let forgotPasswordModal=document.getElementById('forgot-password-modal')
 
 
 // Get the <span> element that closes the modal
@@ -70,6 +71,8 @@ Array.from(closeButton).forEach((element) => {
 function closeModal() {
     loginModal.style.display = "none";
     signupModal.style.display='none';
+    forgotPasswordModal.style.display='none'
+
     clearAllInputFields();
 
 }

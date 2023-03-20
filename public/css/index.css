@@ -188,3 +188,9 @@ input{
 }
 
 
+#forgot-password{
+    text-decoration: none;
+    float: right;
+    font-weight: 600;
+}
+
