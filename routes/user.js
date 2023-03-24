@@ -19,5 +19,8 @@ router.get('/user/is_premium',userAuthentication.authenticate,userController.get
 
 router.post('/user/password/forgot-password',userController.postForgotPassword)
 
+router.get('/user/password/reset-password',userController.getResetPasswordPage)
+
+router.post('/user/password/reset-password',userController.postResetPassword)
 
 module.exports=router;

@@ -1,10 +1,12 @@
 const path = require('path')
 const User = require('../models/user')
+const ForgotPasswordRequest = require('../models/forgotPasswordRequest')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Sib = require('sib-api-v3-sdk')
 const dotenv = require('dotenv')
 dotenv.config();
+const { v4: uuidv4 } = require('uuid')
 
 
 
@@ -123,6 +125,15 @@ exports.postForgotPassword = async (req, res, next) => {
 
     try {
 
+        const user = await User.findOne({ where: { email: req.body.email } })
+        //create request details in ForgotPasswordRequest table
+
+        const requestDetails = await ForgotPasswordRequest.create({
+            id: uuidv4(),
+            isActive: 1,
+            userId: user.id
+        })
+
         const userEmail = req.body.email;
         const client = Sib.ApiClient.instance;
         const apiKey = client.authentications['api-key'];
@@ -136,19 +147,74 @@ exports.postForgotPassword = async (req, res, next) => {
             email: `${userEmail}`
         }]
 
-       await  transacEmailApi.sendTransacEmail({
+        const response = await transacEmailApi.sendTransacEmail({
             sender: sender,
             subject: 'password recover',
             to: reciever,
-            textContent: 'Reset your password'
+            textContent: `http://localhost:3000/user/password/reset-password?forgotPasswordRequestId=${requestDetails.id}`
 
         })
 
-        res.status(200).json({message:'message send successfully'})
+
+        res.status(200).json({ message: 'message send successfully' })
 
     } catch (error) {
         console.log(error)
     }
 
+}
+
+
+exports.getResetPasswordPage = async (req, res, next) => {
+
+    try {
+        const forgotPasswordRequestId = req.query.forgotPasswordRequestId;
+        //check whether forgotPasswordRequestId is valid or not 
+
+        const requestDetails = await ForgotPasswordRequest.findOne({ where: { id: forgotPasswordRequestId } })
+
+        if (!requestDetails) {
+            console.log('pppppppp')
+            res.status(400).json({ message: 'bad request' })
+        }
+        if (requestDetails.isActive == true) {
+            res.status(200).sendFile(path.join(__dirname, '../', 'views/reset-password.html'))
+        }
+
+        else {
+            res.status(419).json({ message: 'link is expired' })
+        }
+
+
+    } catch (error) {
+        console.log(error)
+    }
 
 }
+
+
+exports.postResetPassword = async (req, res, next) => {
+    try {
+        const password = req.body.password;
+        const forgotPasswordRequestId = req.body.forgotPasswordRequestId;
+
+        // find corresponding request details to this forgotPasswordRequestId
+        const requestDetails = await ForgotPasswordRequest.findOne({ where: { id: forgotPasswordRequestId } })
+
+        //make the corresponding request as inactive
+        await ForgotPasswordRequest.update({ isActive: false }, { where: { id: forgotPasswordRequestId } })
+
+        const saltrounds = 10;
+        bcrypt.hash(password, saltrounds, async (err, hash) => {
+            const user = await User.update({
+                password: hash
+            }, { where: { id: requestDetails.userId } })
+
+
+            res.status(201).json({ message: 'password reset successfully' })
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+

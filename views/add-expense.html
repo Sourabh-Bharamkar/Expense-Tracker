@@ -17,16 +17,16 @@
 
         <div class="logo"><img src="/images/expenses.png" alt=""> EXPENSE TRACKER</div>
         <div id="premium-user">You are Premium User</div>
-        <div id="logout-btn">Logout</div>
+        <button id="logout-btn">Logout</button>
 
     </header>
 
     <nav class="navbar">
         <ul class="menu">
-            <li><a href="/add-expense" class="active">Add Expense</a></li>
-            <li><a href="/expense-table">Expense Table</a></li>
-            <li id="buy-premium-link" ><a href="/purchase/buy-premium-membership-page">Buy Premium</a></li>
-            <li id="leaderboard-link" style="display: none;"><a href="/premium/leaderboard-page">Leaderboard</a></li>
+            <li class="active"><a href="/add-expense" class="active" ><img src="/images/add-expense-icon.png" alt="" id="add-expense-icon"> Add Expense</a></li>
+            <li><a href="/expense-table"><a href="/expense-table"><img src="/images/view-expense-icon.png" alt="" id="view-expense-icon">Expense Table</a></li>
+            <li id="buy-premium-link" ><a href="/purchase/buy-premium-membership-page"><img src="/images/buy-premium-icon.png" alt="" id="buy-premium-icon">Buy Premium</a></li>
+            <li id="leaderboard-link" style="display: none;"><a href="/premium/leaderboard-page"><img src="/images/leaderboard-icon.png" alt="" id="leaderboard-icon">Leaderboard</a></li>
         </ul>
 
     </nav>
@@ -37,6 +37,7 @@
         <div class="form-container">
             <form action="" id="add-expense-form">
 
+                <h2>Fill this form to add your expense</h2><br>
                 <div class="">
                     <input type="number" class="" name="expense-amount" id="expense-amount" required
                         placeholder="Expense Amount">
@@ -80,6 +81,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="/js/add-expense.js"></script>
+    <script src="/js/logout.js"></script>
 
 </body>
 

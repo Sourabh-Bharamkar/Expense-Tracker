@@ -23,7 +23,7 @@ async function buyPremiumMembership(e) {
 
         }
 
-        const response = await axios.get('http://localhost:3000/purchase/primium_membership')
+        const response = await axios.get('http://localhost:3000/purchase/premium_membership')
 
         let options = {
             "key": response.data.key_id,
@@ -65,4 +65,37 @@ async function buyPremiumMembership(e) {
     } catch (error) {
         console.log(error)
     }
+}
+
+
+// adding an event listener on dom content loaded 
+window.addEventListener('DOMContentLoaded',checkUserIsPremiumOrNot)
+
+async function checkUserIsPremiumOrNot(){
+    try{
+
+        const response1 = await axios.get('http://localhost:3000/user/is_premium')
+        if (response1.data.isPremium == true) {
+           
+            document.getElementById('leaderboard-link').style.display='block';
+            document.getElementById('premium-user').style.display = "block";
+    
+        }
+        
+    }catch(error){
+        console.log(error)
+        console.log(error.response.data.message)
+        //if user is not logged in redirect to home page
+        if(error.response.data.message=='you are not currently logged in')
+        {
+            window.location='/'
+            window.alert('You are not currently logged in')
+        }
+        if(error.response.data.message=='authentication error')
+        {
+            window.location='/'
+            window.alert('Authentication Error.Please try logging in again.')
+        }
+    }
+   
 }

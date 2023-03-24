@@ -1,13 +1,12 @@
 /* css for add expense form */
 
 .form-container {
-    width: 35%;
+    width: 40%;
     margin: auto;
-    margin-top: 50px;
-    padding: 30px;
+    margin-top: 40px;
+    padding: 40px 50px;
     border: 1px solid#CACACA;
    
-
 }
 
 
@@ -60,3 +59,7 @@ select {
     font-weight: bold;
 }
 
+#add-expense-form h2{
+    font-size: x-large;
+    color: teal;
+}

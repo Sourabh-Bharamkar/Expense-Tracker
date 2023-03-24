@@ -24,11 +24,11 @@ async function signup(e) {
         console.log(typeof password)
 
         if (password.length < 8 || password.length > 20) {
-            document.getElementById('password-error').textContent = "* Passwords must be between 8 and 20 characters long."
+            document.getElementById('signup-password-error').textContent = "* Passwords must be between 8 and 20 characters long."
 
             setTimeout(() => {
-                document.getElementById('password-error').textContent = ""
-            }, 5000)
+                document.getElementById('signup-password-error').textContent = ""
+            }, 4000)
 
             return;
         }

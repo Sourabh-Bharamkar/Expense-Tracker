@@ -5,7 +5,7 @@ const userAuthentication=require('../middlewares/auth')
 
 router.get('/purchase/buy-premium-membership-page',purchaseController.getBuyPremiumMembershipPage)
 
-router.get('/purchase/primium_membership',userAuthentication.authenticate,purchaseController.getPremiumMembership)
+router.get('/purchase/premium_membership',userAuthentication.authenticate,purchaseController.getPremiumMembership)
 
 router.post('/purchase/update_transaction_status',userAuthentication.authenticate,purchaseController.postUpdateTransactionStatus)
 

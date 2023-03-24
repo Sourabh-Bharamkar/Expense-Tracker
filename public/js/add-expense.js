@@ -61,6 +61,7 @@ async function addExpense(e) {
 
     } catch (error) {
         console.log(error)
+        console.log(error.response.message)
     }
 
 }
@@ -81,6 +82,18 @@ async function checkUserIsPremiumOrNot(){
         
     }catch(error){
         console.log(error)
+        console.log(error.response.data.message)
+        //if user is not logged in redirect to home page
+        if(error.response.data.message=='you are not currently logged in')
+        {
+            window.location='/'
+            window.alert('You are not currently logged in')
+        }
+        if(error.response.data.message=='authentication error')
+        {
+            window.location='/'
+            window.alert('Authentication Error.Please try logging in again.')
+        }
     }
    
 }

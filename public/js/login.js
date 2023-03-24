@@ -42,10 +42,10 @@ async function login(e) {
     catch (error) {
 
         if (error.response.data.message == 'password is incorrect') {
-            document.getElementById('password-error').textContent = "* Password is incorrect"
+            document.getElementById('login-password-error').textContent = "* Password is incorrect"
 
             setTimeout(() => {
-                document.getElementById('password-error').textContent = ""
+                document.getElementById('login-password-error').textContent = ""
             }, 5000)
             document.getElementById('login-password').value = "";
             return;
@@ -85,11 +85,11 @@ async function openForgotPasswordModal(e) {
     try {
         e.preventDefault();
         //open modal for forget password and close the login modal
-         
+
         const loginModal = document.getElementById('login-modal')
         const forgotPassworddModal = document.getElementById('forgot-password-modal')
         loginModal.style.display = 'none';
-        forgotPassworddModal.style.display='block';
+        forgotPassworddModal.style.display = 'block';
 
     } catch (error) {
         console.log(error)
@@ -100,19 +100,21 @@ async function openForgotPasswordModal(e) {
 
 // adding event listener to forgot password form on submit 
 
-const forgotPasswordForm=document.getElementById('forgot-password-form')
+const forgotPasswordForm = document.getElementById('forgot-password-form')
 
-forgotPasswordForm.addEventListener('submit',recoverPassword)
+forgotPasswordForm.addEventListener('submit', recoverPassword)
 
-async function recoverPassword(e){
+async function recoverPassword(e) {
 
-    try{
+    try {
         e.preventDefault();
-        const email=document.getElementById('forgot-password-email').value;
-        const response=axios.post('http://localhost:3000/user/password/forgot-password',{email:email})
-        
+        const email = document.getElementById('forgot-password-email').value;
+        const response = await axios.post('http://localhost:3000/user/password/forgot-password', { email: email })
+        const forgotPassworddModal = document.getElementById('forgot-password-modal')
+        document.getElementById('forgot-password-email').value = '';
+        forgotPassworddModal.style.display = 'none';
 
-    }catch(error){
+    } catch (error) {
         console.log(error)
     }
 

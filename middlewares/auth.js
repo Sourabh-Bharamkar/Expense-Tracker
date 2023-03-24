@@ -1,22 +1,26 @@
-const User=require('../models/user')
-const jwt=require('jsonwebtoken')
+const User = require('../models/user')
+const jwt = require('jsonwebtoken')
 
 
-exports.authenticate=async (req,res,next)=>{
+exports.authenticate = async (req, res, next) => {
 
-    try{
+    try {
         console.log('entered into authenticate middleware')
         //decrypting the token and passing the corresponding user through the request
-        const token=req.headers.authorization;
-        const user=jwt.verify(token,'Sourabh@8989')
-        const user1=await User.findByPk(user.userId)
-        req.user=user1;
+        const token = req.headers.authorization;
+        console.log(token)
+        if (token === undefined) {
+            return res.status(401).json({ message: 'you are not currently logged in' })
+        }
+        const user = jwt.verify(token, 'Sourabh@8989')
+        const user1 = await User.findByPk(user.userId)
+        req.user = user1;
         console.log(req.user)
         next();
 
-    }catch(error){
+    } catch (error) {
         console.log(error)
-        res.status(401).json({message:'Authentication error'})
+        res.status(401).json({ message: 'authentication error' })
     }
 
 }

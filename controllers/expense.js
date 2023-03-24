@@ -26,7 +26,7 @@ exports.postAddExpenseDetails = async (req, res, next) => {
 
     //update total expense of user
     const totalExpense = req.user.totalExpense + Number(amount);
-    await User.update({ totalExpense: totalExpense }, { whre: { id: req.user.id }, transaction: t })
+    await User.update({ totalExpense: totalExpense }, { where: { id: req.user.id }, transaction: t })
 
     await t.commit();
     // console.log(response)
