@@ -1,0 +1,69 @@
+/* css for expense table  */
+.expense-report-table {
+    width: 70%;
+    margin: auto;
+    margin-top: 30px;
+    border: 1px solid#CACACA;
+
+}
+
+.expense-report-table thead tr th {
+    padding: 12px 12px;
+    text-align: center;
+    background-color: #8cbdb3;
+    color: rgb(0, 0, 0);
+}
+
+
+.expense-report-table thead th.description {
+    width: 30%;
+}
+
+
+.expense-report-table tbody tr td {
+    padding: 7px 7px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+
+.expense-report-table tbody tr {
+    border-bottom: 1px solid#CACACA;
+}
+
+.expense-report-table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+h2{
+    margin-top: 50px;
+    text-align: center;
+    color: teal;
+    font-size: x-large;
+}
+
+#report-btns{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#report-btns button{
+    margin-left: 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+
+}
+#report-btns button:hover{
+    background-color: rgb(1, 144, 144);
+    color: white;
+}
+
+#download-report-btn{
+  margin-left: 200px;
+  background-color:rgb(7, 167, 7);
+  color: white;
+}
+

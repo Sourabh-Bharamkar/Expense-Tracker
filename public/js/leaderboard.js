@@ -15,7 +15,7 @@ async function showLeaderboard() {
         const response = await axios.get('http://localhost:3000/premium/show_leaderboard')
 
         console.log(response)
-        let rank=1
+        let rank = 1
         response.data.forEach((user) => {
 
             let userDetails = `<tr>
@@ -24,8 +24,8 @@ async function showLeaderboard() {
         <td>${user.totalExpense}</td>
         </tr>`
 
-        //increment the rank
-        rank++;
+            //increment the rank
+            rank++;
             console.log(userDetails)
             document.getElementById('leaderboard-table-body').insertAdjacentHTML('beforeend', userDetails)
 
@@ -42,8 +42,8 @@ async function checkUserIsPremiumOrNot() {
 
         const response1 = await axios.get('http://localhost:3000/user/is_premium')
         if (response1.data.isPremium == true) {
-            document.getElementById('buy-premium-link').style.display = 'none';
             document.getElementById('leaderboard-link').style.display = 'block';
+            document.getElementById('expense-report').style.display = "block";
             document.getElementById('premium-user').style.display = "block";
 
         }

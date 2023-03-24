@@ -25,3 +25,7 @@ exports.getShowLeaderboard = async (req, res, next) => {
 exports.getLeaderboardPage = (req, res, next) => {
     res.status(200).sendFile(path.join(__dirname, '../', 'views/leaderboard.html'))
 }
+
+exports.getExpenseReportPage=(req, res, next) => {
+    res.status(200).sendFile(path.join(__dirname, '../', 'views/expense-report.html'))
+}

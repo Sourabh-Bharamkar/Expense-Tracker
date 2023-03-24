@@ -23,18 +23,24 @@
 
     <nav class="navbar">
         <ul class="menu">
-            <li><a href="/add-expense"><img src="/images/add-expense-icon.png" alt="" id="add-expense-icon"> Add Expense</a></li>
-            <li class="active"><a href="/expense-table"><a href="/expense-table" class="active"><img src="/images/view-expense-icon.png" alt="" id="view-expense-icon">Expense Table</a></li>
-            <li id="buy-premium-link" ><a href="/purchase/buy-premium-membership-page"><img src="/images/buy-premium-icon.png" alt="" id="buy-premium-icon">Buy Premium</a></li>
-            <li id="leaderboard-link" style="display: none;"><a href="/premium/leaderboard-page"><img src="/images/leaderboard-icon.png" alt="" id="leaderboard-icon">Leaderboard</a></li>
+            <li><a href="/add-expense"><img src="/images/add-expense-icon.png" alt="" id="add-expense-icon"> Add
+                    Expense</a></li>
+            <li class="active"><a href="/expense-table"><a href="/expense-table" class="active"><img
+                            src="/images/view-expense-icon.png" alt="" id="view-expense-icon">Expense Table</a></li>
+            <li id="buy-premium-link"><a href="/purchase/buy-premium-membership-page"><img
+                        src="/images/buy-premium-icon.png" alt="" id="buy-premium-icon">Buy Premium</a></li>
+            <li id="leaderboard-link" style="display: none;"><a href="/premium/leaderboard-page"><img
+                        src="/images/leaderboard-icon.png" alt="" id="leaderboard-icon">Leaderboard</a></li>
+            <li id="expense-report" style="display: none;"><a href="/premium/expense-report"> <img
+                        src="/images/expense-report-icon.png" alt="" id="add-expense-icon"> Expense Report</a></li>
         </ul>
 
     </nav>
 
     <main>
 
-         <!-- The modal for edit button  -->
-         <div id="edit-expense-modal" class="modal">
+        <!-- The modal for edit button  -->
+        <div id="edit-expense-modal" class="modal">
 
             <!-- Modal content -->
             <div class="modal-content">
@@ -87,24 +93,24 @@
 
         </div>
 
-            <!-- expense list table  -->
+        <!-- expense list table  -->
 
-            <table class="expense-table" id="expense-table">
-                <thead id="expense-table-head">
-                    <tr>
-                        <th class="amount"> Amount</th>
-                        <th class="description"> Description</th>
-                        <th class="date"> Expense Date</th>
-                        <th class="category"> Category</th>
-                        <th class="action">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="expense-table-body">
-    
-                </tbody>
-    
-            </table>
-    
+        <table class="expense-table" id="expense-table">
+            <thead id="expense-table-head">
+                <tr>
+                    <th class="amount"> Amount</th>
+                    <th class="description"> Description</th>
+                    <th class="date"> Expense Date</th>
+                    <th class="category"> Category</th>
+                    <th class="action">Action</th>
+                </tr>
+            </thead>
+            <tbody id="expense-table-body">
+
+            </tbody>
+
+        </table>
+
 
     </main>
 
@@ -119,6 +125,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="/js/expense-table.js"></script>
+    <script src="/js/logout.js"></script>
 
 </body>
 

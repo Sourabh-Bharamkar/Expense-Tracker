@@ -41,8 +41,7 @@ async function getAllExpensesFromServer() {
             document.getElementById('buy-premium-link').style.display='none';
             document.getElementById('leaderboard-link').style.display='block';
             document.getElementById('premium-user').style.display = "block";
-
-          
+            document.getElementById('expense-report').style.display = "block";
 
         }
 
