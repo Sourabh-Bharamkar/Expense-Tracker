@@ -1,11 +1,9 @@
-
-
 /* css for expense table  */
 .expense-table {
     width: 70%;
     margin: auto;
     margin-top: 30px;
-    border: 1px solid#CACACA;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2)
 
 }
 
@@ -14,6 +12,7 @@
     text-align: center;
     background-color: #8cbdb3;
     color: rgb(0, 0, 0);
+    font-weight:500;
 }
 
 
@@ -66,7 +65,7 @@ td button.edit-btn:hover {
 
 
 /* The Modal (background) */
-.modal {
+.Modal {
     display: none;
     /* Hidden by default */
     position: fixed;
@@ -89,9 +88,10 @@ td button.edit-btn:hover {
 }
 
 /* Modal Content */
-.modal-content {
+.Modal-content {
     background-color: #fefefe;
     margin: auto;
+    margin-top: 105px;
     top: 10%;
     padding: 20px;
     border: 1px solid #888;
@@ -99,13 +99,20 @@ td button.edit-btn:hover {
     width: 35%;
 }
 
-.modal h2 {
+.Modal h2 {
     margin: auto;
     color: #2B7A78;
     font-size: x-large;
 
 }
 
+.Modal-header{
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid#CACACA;
+
+}
 
 /* The Close Button */
 .close {
@@ -184,11 +191,10 @@ select {
     background-color: #2B7A78
 }
 
-#form-submit-message{
+#form-submit-message {
     text-align: center;
     margin: auto;
-    color:rgb(3, 167, 3);
+    color: rgb(3, 167, 3);
     font-size: large;
     font-weight: bold;
 }
-

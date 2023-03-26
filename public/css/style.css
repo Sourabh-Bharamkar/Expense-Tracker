@@ -26,7 +26,7 @@
 }
 
 #logout-btn:hover{
-    color: teal;
+    color: black;
     background-color: #FFDF29;
 
 }
@@ -58,27 +58,26 @@
 }
 
  li a{
-    color: teal;
+    color: black;
     font-size: larger;
     text-decoration: none;
 }
 
 a:hover{
    
-    color:goldenrod;
+    color:black;
+    text-decoration: underline;
 }
 
 a.active{
-    color:goldenrod;
+    color:black;
+    text-decoration: underline;
 }
 
 nav ul li{
     list-style: none;
-    padding: 5px 15px;
-}
-
-nav ul li.active{
-    border-bottom: 2px solid goldenrod; 
+    padding: 10px 20px;
+    
 }
 
 ul{
@@ -89,26 +88,30 @@ ul{
 }
 
 #add-expense-icon{
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
 }
 
 #leaderboard-icon{
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
 }
 
 #view-expense-icon{
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
 }
 
 #buy-premium-icon{
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
 }
 
 #expense-report-icon{
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
+}
+
+a img{
+    display: none;
 }

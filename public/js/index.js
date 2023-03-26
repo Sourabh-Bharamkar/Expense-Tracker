@@ -80,7 +80,7 @@ function closeModal() {
 window.addEventListener('click', modalDisplayOff)
 
 function modalDisplayOff(e) {
-    if (e.target.classList.contains('modal')) {
+    if (e.target.classList.contains('Modal')) {
         e.target.style.display = 'none';
         clearAllInputFields();
     }
