@@ -7,6 +7,7 @@
     background-color: teal;
     padding: 10px;
     color: #fff;
+   
 }
 
 #premium-user {
@@ -47,7 +48,6 @@
 
 /* css for navbar */
 .navbar {
-
     display: flex;
     align-items:first baseline;
     justify-content: space-between;

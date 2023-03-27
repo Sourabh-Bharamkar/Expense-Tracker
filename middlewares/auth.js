@@ -14,6 +14,9 @@ exports.authenticate = async (req, res, next) => {
         }
         const user = jwt.verify(token, 'Sourabh@8989')
         const user1 = await User.findByPk(user.userId)
+        if(user1===null){
+           return res.status(401).json({ message: 'authentication error' })
+        }
         req.user = user1;
         console.log(req.user)
         next();

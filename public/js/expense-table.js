@@ -3,6 +3,40 @@ axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 
 let expenseTable = document.getElementById('expense-table')
 
+// adding an event listener on dom content loaded ,check user is premium or not 
+window.addEventListener('DOMContentLoaded',checkUserIsPremiumOrNot)
+
+async function checkUserIsPremiumOrNot(){
+    try{
+
+        const response1 = await axios.get('http://localhost:3000/user/is_premium')
+        if (response1.data.isPremium == true) {
+            document.getElementById('buy-premium-link').style.display='none';
+            document.getElementById('leaderboard-link').style.display='block';
+            document.getElementById('premium-user').style.display = "block";
+            document.getElementById('expense-report').style.display = "block";
+    
+        }
+        
+    }catch(error){
+        console.log(error)
+        console.log(error.response.data.message)
+        //if user is not logged in redirect to home page
+        if(error.response.data.message=='you are not currently logged in')
+        {
+            window.location='/'
+            window.alert('You are not currently logged in')
+        }
+        if(error.response.data.message=='authentication error')
+        {
+            window.location='/'
+            window.alert('Authentication Error.Please try logging in again.')
+        }
+    }
+   
+}
+
+
 //get all expense details from server and show them on user screen 
 //adding event handler to  DOMContentLoaded
 
@@ -28,40 +62,14 @@ async function getAllExpensesFromServer() {
             <button class='delete-btn'>Delete</button></td>
             </tr>`
 
-            document.getElementById('expense-table-body').insertAdjacentHTML('beforeend', expenseDetailsHTML)
+            document.getElementById('expense-table-body').insertAdjacentHTML("afterbegin", expenseDetailsHTML)
 
         })
 
 
-        //check whether user is primium user or not
-        //if he is premium user remove the buy premium button and show he is premium user
-
-        const response1 = await axios.get('http://localhost:3000/user/is_premium')
-        if (response1.data.isPremium == true) {
-            document.getElementById('buy-premium-link').style.display='none';
-            document.getElementById('leaderboard-link').style.display='block';
-            document.getElementById('premium-user').style.display = "block";
-            document.getElementById('expense-report').style.display = "block";
-
-        }
-
-
     } catch (error) {
         console.log(error)
-        console.log(error.response.data.message)
-        //if user is not logged in redirect to home page
-        if(error.response.data.message=='you are not currently logged in')
-        {
-            window.location='/'
-            window.alert('You are not currently logged in')
-        }
-        if(error.response.data.message=='authentication error')
-        {
-            window.location='/'
-            window.alert('Authentication Error.Please try logging in again.')
-        }
-        console.log(error)
-
+       
     }
 
 }

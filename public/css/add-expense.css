@@ -3,7 +3,7 @@
 .form-container {
     width: 35%;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 70px;
     padding: 40px 40px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2)
 }
@@ -53,6 +53,7 @@ select {
 #form-submit-message{
     text-align: center;
     margin: auto;
+    margin-top: 10px;
     color:rgb(3, 167, 3);
     font-size: large;
     font-weight: bold;

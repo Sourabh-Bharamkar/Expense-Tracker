@@ -1,69 +1,63 @@
 /* css for expense table  */
-.expense-report-table {
-    width: 70%;
+table {
     margin: auto;
     margin-top: 30px;
+    margin-bottom: 30px;
     border: 1px solid#CACACA;
-
+    width: 80%;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2)
 }
 
-.expense-report-table thead tr th {
-    padding: 12px 12px;
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: x-large;
+}
+
+table thead tr th {
+
     text-align: center;
     background-color: #8cbdb3;
     color: rgb(0, 0, 0);
+    font-weight: 500;
 }
 
 
-.expense-report-table thead th.description {
-    width: 30%;
-}
-
-
-.expense-report-table tbody tr td {
+table tbody tr td {
     padding: 7px 7px;
     text-align: center;
     word-wrap: break-word;
 }
 
 
-.expense-report-table tbody tr {
+table tbody tr {
     border-bottom: 1px solid#CACACA;
 }
 
-.expense-report-table tbody tr:hover {
+table tbody tr:hover {
     background-color: #f2f2f2;
 }
 
-h2{
-    margin-top: 50px;
-    text-align: center;
-    color: teal;
-    font-size: x-large;
-}
 
-#report-btns{
+#report-btns {
     margin-top: 30px;
     display: flex;
     align-items: center;
-    justify-content: center;
 
 }
-#report-btns button{
-    margin-left: 30px;
+
+#download-report-btn {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-
-}
-#report-btns button:hover{
-    background-color: rgb(1, 144, 144);
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: rgb(7, 167, 7);
     color: white;
 }
 
-#download-report-btn{
-  margin-left: 200px;
-  background-color:rgb(7, 167, 7);
-  color: white;
+#download-report-btn:hover {
+    background-color: rgb(5, 143, 5);
+    color: white;
 }
 

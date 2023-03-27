@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,22 +11,33 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/404.css">
 </head>
+
 <body>
 
     <header class="header">
 
         <div class="logo"><img src="/images/expenses.png" alt=""> EXPENSE TRACKER</div>
-        
+
     </header>
 
     <main>
-        <div id="body-background-image">
-            <a href="/"><img src="/images/404.png" alt="Page Not Found"></a>
-            <p>Click on Apple to go back to home page</p>
+
+        <div id="page-not-found">
+            <div id="page-not-found-text">
+                <h1>404</h1><br>
+                <h2>Page Not Found</h2>
+                <p>The page you are looking for does not exist or it is removed. </p><br>
+                <button onclick="history.back()">GO BACK</button>
             </div>
+            <div id="page-not-found-image">
+                <img src="/images/404.jpg" alt="">
+            </div>
+        </div>
+
     </main>
-  
+
 
     <script src="/js/404.js"></script>
 </body>
+
 </html>

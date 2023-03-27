@@ -15,6 +15,7 @@ const User=require('./models/user')
 const Expense=require('./models/expense')
 const Order=require('./models/order')
 const ForgotPasswordRequest=require('./models/forgotPasswordRequest')
+const DownloadedExpenseReport=require('./models/downloadedExpenseReport')
 
 const pageNotFoundMiddleware=require('./middlewares/404')
 
@@ -38,6 +39,9 @@ Order.belongsTo(User)
 
 User.hasMany(ForgotPasswordRequest)
 ForgotPasswordRequest.belongsTo(User)
+
+User.hasMany(DownloadedExpenseReport)
+DownloadedExpenseReport.belongsTo(User)
 
 sequelize.sync()
     .then(() => {

@@ -30,7 +30,7 @@
             <li id="leaderboard-link" style="display: none;"><a href="/premium/leaderboard-page"><img
                         src="/images/leaderboard-icon.png" alt="" id="leaderboard-icon">Leaderboard</a>
             </li>
-            <li class="active" id="expense-report" style="display: none;"><a href="/premium/expense-report"
+            <li class="active" id="expense-report" style="display: none;"><a href="/premium/expense-report-page"
                     class="active"> <img src="/images/expense-report-icon.png" alt="" id="add-expense-icon"> Expense
                     Report</a></li>
         </ul>
@@ -40,11 +40,25 @@
     <main>
 
         <div id="report-btns">
-            <button> Weekly Report</button>
-            <button> Monthly Report</button>
-            <button> Yearly Report</button>
             <button id="download-report-btn">Download Report</button>
+        </div>
 
+        <div>
+            <h2>Expense Report Download History</h2>
+
+            <table id="expense-report-download-history-table">
+                <thead id="expense-report-download-history-table-head">
+                    <tr>
+                        <th>file URL</th>
+                        <th> Downloaded On</th>
+                    </tr>
+                </thead>
+    
+                <tbody id="expense-report-download-history-table-body">
+    
+                </tbody>
+
+            </table>
         </div>
 
         <!-- <h2>Weekly Report</h2> -->
