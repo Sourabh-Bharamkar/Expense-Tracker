@@ -198,3 +198,21 @@ select {
     font-size: large;
     font-weight: bold;
 }
+
+#pagination-container{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin-bottom: 20px;
+}
+#pagination-container button{
+
+    margin: 5px;
+    border: none;
+
+}
+#pagination-container button.active{
+    background-color: #3AAFA9;
+    color: white;
+}

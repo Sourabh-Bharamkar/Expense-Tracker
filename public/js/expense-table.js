@@ -4,74 +4,124 @@ axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 let expenseTable = document.getElementById('expense-table')
 
 // adding an event listener on dom content loaded ,check user is premium or not 
-window.addEventListener('DOMContentLoaded',checkUserIsPremiumOrNot)
+window.addEventListener('DOMContentLoaded', checkUserIsPremiumOrNot)
 
-async function checkUserIsPremiumOrNot(){
-    try{
+async function checkUserIsPremiumOrNot() {
+    try {
 
         const response1 = await axios.get('http://localhost:3000/user/is_premium')
         if (response1.data.isPremium == true) {
-            document.getElementById('buy-premium-link').style.display='none';
-            document.getElementById('leaderboard-link').style.display='block';
+            document.getElementById('buy-premium-link').style.display = 'none';
+            document.getElementById('leaderboard-link').style.display = 'block';
             document.getElementById('premium-user').style.display = "block";
             document.getElementById('expense-report').style.display = "block";
-    
+
         }
-        
-    }catch(error){
+
+    } catch (error) {
         console.log(error)
         console.log(error.response.data.message)
         //if user is not logged in redirect to home page
-        if(error.response.data.message=='you are not currently logged in')
-        {
-            window.location='/'
+        if (error.response.data.message == 'you are not currently logged in') {
+            window.location = '/'
             window.alert('You are not currently logged in')
         }
-        if(error.response.data.message=='authentication error')
-        {
-            window.location='/'
+        if (error.response.data.message == 'authentication error') {
+            window.location = '/'
             window.alert('Authentication Error.Please try logging in again.')
         }
     }
-   
+
 }
 
 
 //get all expense details from server and show them on user screen 
 //adding event handler to  DOMContentLoaded
 
-window.addEventListener('DOMContentLoaded', getAllExpensesFromServer)
+window.addEventListener('DOMContentLoaded', getExpensesFromServer)
 
-async function getAllExpensesFromServer() {
+async function getExpensesFromServer() {
 
     try {
         console.log('entered into getAllExpensesFromServer function')
-        const token = localStorage.getItem('token')
-        const response = await axios.get('http://localhost:3000/expenses')
-        let expenseDetails = response.data;
-        console.log(response.data)
-        expenseDetails.forEach((element) => {
+        //send request for getting 1st 10 expenses
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page') || 1;
 
-            let expenseDetailsHTML =
-                `<tr id=${element.id}> 
-            <td>${element.amount}</td> 
-            <td>${element.description}</td>
-            <td>${element.date}</td>
-            <td>${element.category}</td> 
-            <td><button class='edit-btn'>Edit</button>
-            <button class='delete-btn'>Delete</button></td>
-            </tr>`
+        const response = await axios.get(`http://localhost:3000/expenses?page=${page}`)
+        //show expenses in the table
+        //show pagination
 
-            document.getElementById('expense-table-body').insertAdjacentHTML("afterbegin", expenseDetailsHTML)
-
-        })
-
+        showExpenses(response.data.expenses)
+        await showPagination(response.data);
 
     } catch (error) {
         console.log(error)
-       
+
     }
 
+}
+
+async function showPagination(object) {
+
+    document.getElementById('pagination-container').innerHTML = '';
+
+    //add previous page button if it exists
+    if (object.hasPreviousPage) {
+        const previousPageBtn = document.createElement('button')
+        previousPageBtn.innerText = `${object.previousPage}`;
+        previousPageBtn.addEventListener('click', () => { getExpenses(object.previousPage) })
+        document.getElementById('pagination-container').appendChild(previousPageBtn)
+
+    }
+
+    //add current page button
+    const currentPageBtn = document.createElement('button')
+    currentPageBtn.innerText = `${object.currentPage}`;
+    currentPageBtn.classList.add('active')
+    currentPageBtn.addEventListener('click', () => { getExpenses(object.currentPage) })
+    document.getElementById('pagination-container').appendChild(currentPageBtn)
+
+
+    //add next page button if it exists
+    if (object.hasNextPage) {
+        const nextPageBtn = document.createElement('button')
+        nextPageBtn.innerText = `${object.nextPage}`;
+        console.log(object.nextPage)
+        nextPageBtn.addEventListener('click', () => { getExpenses(object.nextPage) })
+        document.getElementById('pagination-container').appendChild(nextPageBtn)
+
+    }
+
+}
+
+
+async function getExpenses(page) {
+
+    const response = await axios.get(`http://localhost:3000/expenses?page=${page}`)
+    showExpenses(response.data.expenses)
+    await showPagination(response.data);
+}
+
+
+function showExpenses(expenses) {
+
+    document.getElementById('expense-table-body').innerHTML=''
+    expenses.forEach((element) => {
+
+        let expenseDetailsHTML =
+            `<tr id=${element.id}> 
+        <td>${element.amount}</td> 
+        <td>${element.description}</td>
+        <td>${element.date}</td>
+        <td>${element.category}</td> 
+        <td><button class='edit-btn'>Edit</button>
+        <button class='delete-btn'>Delete</button></td>
+        </tr>`
+
+        document.getElementById('expense-table-body').insertAdjacentHTML('beforeend', expenseDetailsHTML)
+
+    })
 }
 
 
@@ -87,7 +137,7 @@ async function deleteExpense(e) {
             if (response) {
 
                 let id = e.target.parentNode.parentNode.id;
-                const response = await axios.post(`http://localhost:3000/delete-expense`,{id:id})
+                const response = await axios.post(`http://localhost:3000/delete-expense`, { id: id })
 
                 // delete target element from screen also
                 e.target.parentNode.parentNode.remove();

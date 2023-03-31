@@ -44,12 +44,31 @@ exports.postAddExpenseDetails = async (req, res, next) => {
 exports.getExpenses = async (req, res, next) => {
 
   try {
-    console.log('Entered into getExpense Controller')
-    console.log(req.user)
-    const expenses = await req.user.getExpenses();//
     console.log('entered into getExpenses controller')
-    // console.log(result)
-    res.json(expenses)
+    const page = req.query.page;
+   
+    const itemsPerPage = 8;
+
+    const expenses = await req.user.getExpenses({ 
+      offset: (itemsPerPage * page - itemsPerPage), 
+      limit: itemsPerPage,
+      order: [
+        ["createdAt", "DESC"]
+      ]
+     })
+
+
+    const totalNumberOfItems = await Expense.count({ where: { userId: req.user.id } })
+
+    res.status(200).json({
+      expenses: expenses,
+      currentPage: page,
+      hasNextPage: (page * itemsPerPage < totalNumberOfItems),
+      nextPage: (Number(page) + 1),
+      hasPreviousPage: page > 1,
+      previousPage: page - 1,
+      lastPage: Math.ceil(totalNumberOfItems / itemsPerPage)
+    })
 
   } catch (error) {
     console.log(error)
