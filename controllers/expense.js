@@ -1,3 +1,4 @@
+const { CostExplorer } = require('aws-sdk')
 const path = require('path')
 const Expense = require('../models/expense')
 const User = require('../models/user')
@@ -45,17 +46,25 @@ exports.getExpenses = async (req, res, next) => {
 
   try {
     console.log('entered into getExpenses controller')
-    const page = req.query.page;
-   
-    const itemsPerPage = 8;
+    const page = Number(req.query.page);
+    let rowsPerPage;
 
-    const expenses = await req.user.getExpenses({ 
-      offset: (itemsPerPage * page - itemsPerPage), 
-      limit: itemsPerPage,
+    if (req.query.rowsPerPage == undefined) {
+      rowsPerPage = 8;
+    }
+    else {
+      rowsPerPage = Number(req.query.rowsPerPage);
+
+    }
+
+
+    const expenses = await req.user.getExpenses({
+      offset: (rowsPerPage * page - rowsPerPage),
+      limit: rowsPerPage,
       order: [
         ["createdAt", "DESC"]
       ]
-     })
+    })
 
 
     const totalNumberOfItems = await Expense.count({ where: { userId: req.user.id } })
@@ -63,11 +72,11 @@ exports.getExpenses = async (req, res, next) => {
     res.status(200).json({
       expenses: expenses,
       currentPage: page,
-      hasNextPage: (page * itemsPerPage < totalNumberOfItems),
+      hasNextPage: (page * rowsPerPage < totalNumberOfItems),
       nextPage: (Number(page) + 1),
       hasPreviousPage: page > 1,
       previousPage: page - 1,
-      lastPage: Math.ceil(totalNumberOfItems / itemsPerPage)
+      lastPage: Math.ceil(totalNumberOfItems / rowsPerPage)
     })
 
   } catch (error) {

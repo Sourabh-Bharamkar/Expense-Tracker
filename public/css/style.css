@@ -7,7 +7,7 @@
     background-color: teal;
     padding: 10px;
     color: #fff;
-   
+
 }
 
 #premium-user {
@@ -26,7 +26,7 @@
     padding: 4px 10px;
 }
 
-#logout-btn:hover{
+#logout-btn:hover {
     color: black;
     background-color: #FFDF29;
 
@@ -41,7 +41,7 @@
     letter-spacing: 2px;
 }
 
-.logo img{
+.logo img {
     height: 40px;
 }
 
@@ -49,69 +49,75 @@
 /* css for navbar */
 .navbar {
     display: flex;
-    align-items:first baseline;
+    align-items: first baseline;
     justify-content: space-between;
     background-color: #f6f6f2;
     color: #fff;
     padding: 0%;
-    
 }
 
- li a{
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+}
+
+li a {
     color: black;
     font-size: larger;
     text-decoration: none;
 }
 
-a:hover{
-   
-    color:black;
+a:hover {
+
+    color: black;
     text-decoration: underline;
 }
 
-a.active{
-    color:black;
+a.active {
+    color: black;
     text-decoration: underline;
 }
 
-nav ul li{
+nav ul li {
     list-style: none;
     padding: 10px 20px;
-    
+
 }
 
-ul{
+ul {
     display: flex;
     box-sizing: border-box;
     margin: auto;
     margin-left: 0px;
 }
 
-#add-expense-icon{
+#add-expense-icon {
     width: 25px;
     height: 25px;
 }
 
-#leaderboard-icon{
+#leaderboard-icon {
     width: 25px;
     height: 25px;
 }
 
-#view-expense-icon{
+#view-expense-icon {
     width: 25px;
     height: 25px;
 }
 
-#buy-premium-icon{
+#buy-premium-icon {
     width: 25px;
     height: 25px;
 }
 
-#expense-report-icon{
+#expense-report-icon {
     width: 25px;
     height: 25px;
 }
 
-a img{
+a img {
     display: none;
 }

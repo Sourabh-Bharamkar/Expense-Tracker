@@ -1,5 +1,7 @@
 //setting header common to all requests
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+axios.defaults.headers.common['rowsPerPage'] = localStorage.getItem('token')
+
 
 let expenseTable = document.getElementById('expense-table')
 
@@ -47,11 +49,10 @@ async function getExpensesFromServer() {
         //send request for getting 1st 10 expenses
         const urlParams = new URLSearchParams(window.location.search);
         const page = urlParams.get('page') || 1;
+        const rowsPerPage = localStorage.getItem('rows-per-page')
+        const response = await axios.get(`http://localhost:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
 
-        const response = await axios.get(`http://localhost:3000/expenses?page=${page}`)
-        //show expenses in the table
-        //show pagination
-
+        //show expenses and pagination 
         showExpenses(response.data.expenses)
         await showPagination(response.data);
 
@@ -64,14 +65,14 @@ async function getExpensesFromServer() {
 
 async function showPagination(object) {
 
-    document.getElementById('pagination-container').innerHTML = '';
+    document.getElementById('pagination-btns').innerHTML = '';
 
     //add previous page button if it exists
     if (object.hasPreviousPage) {
         const previousPageBtn = document.createElement('button')
         previousPageBtn.innerText = `${object.previousPage}`;
         previousPageBtn.addEventListener('click', () => { getExpenses(object.previousPage) })
-        document.getElementById('pagination-container').appendChild(previousPageBtn)
+        document.getElementById('pagination-btns').appendChild(previousPageBtn)
 
     }
 
@@ -80,16 +81,24 @@ async function showPagination(object) {
     currentPageBtn.innerText = `${object.currentPage}`;
     currentPageBtn.classList.add('active')
     currentPageBtn.addEventListener('click', () => { getExpenses(object.currentPage) })
-    document.getElementById('pagination-container').appendChild(currentPageBtn)
+    document.getElementById('pagination-btns').appendChild(currentPageBtn)
 
 
     //add next page button if it exists
     if (object.hasNextPage) {
         const nextPageBtn = document.createElement('button')
         nextPageBtn.innerText = `${object.nextPage}`;
-        console.log(object.nextPage)
         nextPageBtn.addEventListener('click', () => { getExpenses(object.nextPage) })
-        document.getElementById('pagination-container').appendChild(nextPageBtn)
+        document.getElementById('pagination-btns').appendChild(nextPageBtn)
+
+    }
+
+    if(object.lastPage>object.nextPage){
+        const lastPageBtn = document.createElement('button')
+        lastPageBtn.innerText = `${object.lastPage}`;
+        lastPageBtn.addEventListener('click', () => { getExpenses(object.lastPage) })
+        document.getElementById('pagination-btns').insertAdjacentHTML('beforeend','....')
+        document.getElementById('pagination-btns').appendChild(lastPageBtn)
 
     }
 
@@ -98,7 +107,8 @@ async function showPagination(object) {
 
 async function getExpenses(page) {
 
-    const response = await axios.get(`http://localhost:3000/expenses?page=${page}`)
+    const rowsPerPage = localStorage.getItem('rows-per-page')
+    const response = await axios.get(`http://localhost:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
     showExpenses(response.data.expenses)
     await showPagination(response.data);
 }
@@ -106,7 +116,7 @@ async function getExpenses(page) {
 
 function showExpenses(expenses) {
 
-    document.getElementById('expense-table-body').innerHTML=''
+    document.getElementById('expense-table-body').innerHTML = ''
     expenses.forEach((element) => {
 
         let expenseDetailsHTML =
@@ -255,3 +265,31 @@ function modalDisplayOff(e) {
         e.target.style.display = 'none'
     }
 }
+
+
+//adding an event listener to no of rows form submit button
+
+document.getElementById('no-of-rows-form').addEventListener('submit', async (e) => {
+
+    try {
+        e.preventDefault();
+        //store key in local storage for no of rows 
+        localStorage.setItem('rows-per-page', document.getElementById('no-of-rows').value)
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page') || 1;
+        const rowsPerPage = localStorage.getItem('rows-per-page')
+
+        const response = await axios.get(`http://localhost:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
+
+        //show expenses in the table
+        //show pagination
+
+        showExpenses(response.data.expenses)
+        await showPagination(response.data);
+
+    } catch (error) {
+        console.log(error)
+    }
+
+})
