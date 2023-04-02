@@ -93,6 +93,7 @@ async function showPagination(object) {
 
     }
 
+    //add last page button 
     if(object.lastPage>object.nextPage){
         const lastPageBtn = document.createElement('button')
         lastPageBtn.innerText = `${object.lastPage}`;

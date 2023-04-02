@@ -36,7 +36,8 @@ exports.postAddExpenseDetails = async (req, res, next) => {
   } catch (error) {
     await t.rollback()
     console.log(error)
-    res.status(500).json({ message: 'failed to create resource' })
+    res.status(500).json({ success: false, error: error, message: 'failed to create resource' })
+
   }
 
 }
@@ -49,7 +50,8 @@ exports.getExpenses = async (req, res, next) => {
     const page = Number(req.query.page);
     let rowsPerPage;
 
-    if (req.query.rowsPerPage == undefined) {
+    console.log(req.query.rowsPerPage)
+    if (req.query.rowsPerPage == undefined || req.query.rowsPerPage == 'null') {
       rowsPerPage = 8;
     }
     else {
@@ -81,6 +83,7 @@ exports.getExpenses = async (req, res, next) => {
 
   } catch (error) {
     console.log(error)
+    res.status(500).json({ success: false, error: error })
   }
 
 }
@@ -114,7 +117,8 @@ exports.postDeleteExpense = async (req, res, next) => {
   } catch (error) {
     await t.rollback()
     console.log(error)
-    res.status(500).json({ message: 'failed to delete' })
+    res.status(500).json({ success: false, error: error, message: 'failed to delete' })
+
   }
 
 }
@@ -156,6 +160,7 @@ exports.postEditExpense = async (req, res, next) => {
   } catch (error) {
     await t.rollback();
     console.log(error)
+    res.status(500).json({ success: false, error: error })
 
   }
 
@@ -180,16 +185,31 @@ exports.getExpenseDetails = async (req, res, next) => {
 
   } catch (error) {
     console.log(error)
+    res.status(500).json({ success: false, error: error })
 
   }
 
 }
 
-exports.getAddExpensePage = (req, res, next) => {
-  res.status(200).sendFile(path.join(__dirname, '../', 'views/add-expense.html'))
+exports.getAddExpensePage = async (req, res, next) => {
+  try {
+    res.status(200).sendFile(path.join(__dirname, '../', 'views/add-expense.html'))
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ success: false, error: error })
+
+  }
+
 }
 
 
-exports.getExpenseTable = (req, res, next) => {
-  res.status(200).sendFile(path.join(__dirname, '../', 'views/expense-table.html'))
+exports.getExpenseTable = async (req, res, next) => {
+  try {
+    res.status(200).sendFile(path.join(__dirname, '../', 'views/expense-table.html'))
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ success: false, error: error })
+  }
+
 }
