@@ -45,7 +45,7 @@ async function addExpense(e) {
 
         console.log('inside add expense function')
         
-        const response = await axios.post(`http://localhost:3000/add-expense-details`, expenseDetails)
+        const response = await axios.post(`http://34.201.14.35:3000/add-expense-details`, expenseDetails)
 
         //showing succcess message on form
         document.getElementById('form-submit-message').textContent = 'Expense added successfully...'
@@ -72,7 +72,7 @@ window.addEventListener('DOMContentLoaded',checkUserIsPremiumOrNot)
 async function checkUserIsPremiumOrNot(){
     try{
 
-        const response1 = await axios.get('http://localhost:3000/user/is_premium')
+        const response1 = await axios.get('http://34.201.14.35:3000/user/is_premium')
         if (response1.data.isPremium == true) {
             document.getElementById('buy-premium-link').style.display='none';
             document.getElementById('leaderboard-link').style.display='block';

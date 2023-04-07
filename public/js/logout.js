@@ -5,5 +5,5 @@ logoutBtn.addEventListener('click',logout)
 function logout(){
     localStorage.clear();
     sessionStorage.clear();
-    window.location='http://localhost:3000/'
+    window.location='http://34.201.14.35:3000/'
 }

@@ -151,7 +151,7 @@ exports.postForgotPassword = async (req, res, next) => {
             sender: sender,
             subject: 'password recover',
             to: reciever,
-            textContent: `http://localhost:3000/user/password/reset-password?forgotPasswordRequestId=${requestDetails.id}`
+            textContent: `http://34.201.14.35:3000/user/password/reset-password?forgotPasswordRequestId=${requestDetails.id}`
 
         })
 

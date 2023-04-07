@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', checkUserIsPremiumOrNot)
 async function checkUserIsPremiumOrNot() {
     try {
 
-        const response1 = await axios.get('http://localhost:3000/user/is_premium')
+        const response1 = await axios.get('http://34.201.14.35:3000/user/is_premium')
         if (response1.data.isPremium == true) {
             document.getElementById('buy-premium-link').style.display = 'none';
             document.getElementById('leaderboard-link').style.display = 'block';
@@ -50,7 +50,7 @@ async function getExpensesFromServer() {
         const urlParams = new URLSearchParams(window.location.search);
         const page = urlParams.get('page') || 1;
         const rowsPerPage = localStorage.getItem('rows-per-page')
-        const response = await axios.get(`http://localhost:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
+        const response = await axios.get(`http://34.201.14.35:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
 
         //show expenses and pagination 
         showExpenses(response.data.expenses)
@@ -109,7 +109,7 @@ async function showPagination(object) {
 async function getExpenses(page) {
 
     const rowsPerPage = localStorage.getItem('rows-per-page')
-    const response = await axios.get(`http://localhost:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
+    const response = await axios.get(`http://34.201.14.35:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
     showExpenses(response.data.expenses)
     await showPagination(response.data);
 }
@@ -148,7 +148,7 @@ async function deleteExpense(e) {
             if (response) {
 
                 let id = e.target.parentNode.parentNode.id;
-                const response = await axios.post(`http://localhost:3000/delete-expense`, { id: id })
+                const response = await axios.post(`http://34.201.14.35:3000/delete-expense`, { id: id })
 
                 // delete target element from screen also
                 e.target.parentNode.parentNode.remove();
@@ -177,7 +177,7 @@ async function autoFillEditExpenseForm(e) {
 
             editExpenseModal.style.display = 'block';
 
-            const response = await axios.get(`http://localhost:3000/expense-details/${id}`)
+            const response = await axios.get(`http://34.201.14.35:3000/expense-details/${id}`)
             console.log(response.data)
 
             document.getElementById('edit-expense-id').value = response.data.id
@@ -209,7 +209,7 @@ async function editExpense(e) {
             category: document.getElementById('edit-expense-category').value
         }
 
-        const response1 = await axios.post(`http://localhost:3000/edit-expense`, expenseDetails)
+        const response1 = await axios.post(`http://34.201.14.35:3000/edit-expense`, expenseDetails)
         const updatedExpenseDetails = response1.data;
 
         console.log(response1)
@@ -281,7 +281,7 @@ document.getElementById('no-of-rows-form').addEventListener('submit', async (e) 
         const page = urlParams.get('page') || 1;
         const rowsPerPage = localStorage.getItem('rows-per-page')
 
-        const response = await axios.get(`http://localhost:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
+        const response = await axios.get(`http://34.201.14.35:3000/expenses?page=${page}&rowsPerPage=${rowsPerPage}`)
 
         //show expenses in the table
         //show pagination

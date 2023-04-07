@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded',checkUserIsPremiumOrNot)
 async function checkUserIsPremiumOrNot(){
     try{
 
-        const response1 = await axios.get('http://localhost:3000/user/is_premium')
+        const response1 = await axios.get('http://34.201.14.35:3000/user/is_premium')
         if (response1.data.isPremium == true) {
            
             document.getElementById('leaderboard-link').style.display='block';
@@ -42,7 +42,7 @@ downloadReportBtn.addEventListener('click',downloadExpenseReport)
 
 async function downloadExpenseReport(){
     try{
-        const response=await axios.get('http://localhost:3000/premium/download-expense-report')
+        const response=await axios.get('http://34.201.14.35:3000/premium/download-expense-report')
 
         const a=document.createElement('a')
         a.href=response.data.fileURL;
@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded',checkUserIsPremiumOrNot)
 async function checkUserIsPremiumOrNot(){
     try{
 
-        const response1 = await axios.get('http://localhost:3000/user/is_premium')
+        const response1 = await axios.get('http://34.201.14.35:3000/user/is_premium')
         if (response1.data.isPremium == true) {
             document.getElementById('leaderboard-link').style.display='block';
             document.getElementById('premium-user').style.display = "block";
@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded',showDownloadHistory)
 async function showDownloadHistory(){
 try{
 
-    const response=await axios.get('http://localhost:3000/premium/show-expense-report-download-history')
+    const response=await axios.get('http://34.201.14.35:3000/premium/show-expense-report-download-history')
 
     const downloadHistory=Array.from(response.data);
 

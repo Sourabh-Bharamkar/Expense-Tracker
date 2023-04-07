@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded',checkUserIsPremiumOrNot)
 async function checkUserIsPremiumOrNot(){
     try{
 
-        const response1 = await axios.get('http://localhost:3000/user/is_premium')
+        const response1 = await axios.get('http://34.201.14.35:3000/user/is_premium')
         console.log('inside check user is premium or not')
         if (response1.data.isPremium == true) {
             document.getElementById('leaderboard-link').style.display='block';
@@ -45,7 +45,7 @@ async function showLeaderboard() {
         
         const leaderboard_table = document.getElementById('leaderboard-table')
 
-        const response = await axios.get('http://localhost:3000/premium/show_leaderboard')
+        const response = await axios.get('http://34.201.14.35:3000/premium/show_leaderboard')
 
         console.log(response)
         let rank = 1

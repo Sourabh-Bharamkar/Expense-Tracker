@@ -35,7 +35,7 @@ async function resetPassword(e) {
         );
         const forgotPasswordRequestId = url.searchParams.get('forgotPasswordRequestId')
 
-        const response = await axios.post('http://localhost:3000/user/password/reset-password', { password: newPassword, forgotPasswordRequestId: forgotPasswordRequestId })
+        const response = await axios.post('http://34.201.14.35:3000/user/password/reset-password', { password: newPassword, forgotPasswordRequestId: forgotPasswordRequestId })
 
         if(response.data.message=='password reset successfully')
         {
@@ -44,7 +44,7 @@ async function resetPassword(e) {
             setTimeout(()=>{
                 document.getElementById('reset-password-form-message').textContent=''
                 clearInputFields()
-                window.location='http://localhost:3000/'
+                window.location='http://34.201.14.35:3000/'
             },2000)
             
         }

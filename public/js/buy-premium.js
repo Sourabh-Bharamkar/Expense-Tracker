@@ -9,7 +9,7 @@ buyPrimiumBtn.addEventListener('click', buyPremiumMembership)
 async function buyPremiumMembership(e) {
     try {
 
-        const response1=await axios.get('http://localhost:3000/user/is_premium')
+        const response1=await axios.get('http://34.201.14.35:3000/user/is_premium')
 
         console.log(response1.data.isPremium)
         if(response1.data.isPremium==true)
@@ -23,13 +23,13 @@ async function buyPremiumMembership(e) {
 
         }
 
-        const response = await axios.get('http://localhost:3000/purchase/premium_membership')
+        const response = await axios.get('http://34.201.14.35:3000/purchase/premium_membership')
 
         let options = {
             "key": response.data.key_id,
             "order_id": response.data.order.id,
             "handler": async function (response) {
-                await axios.post('http://localhost:3000/purchase/update_transaction_status', {
+                await axios.post('http://34.201.14.35:3000/purchase/update_transaction_status', {
                     order_id: options.order_id,
                     payment_id: response.razorpay_payment_id,
                     status: 'SUCCESSFUL',
@@ -53,7 +53,7 @@ async function buyPremiumMembership(e) {
         e.preventDefault();
 
         rzp.on('payment.failed', (response) => {
-            axios.post('http://localhost:3000/purchase/update_transaction_status', {
+            axios.post('http://34.201.14.35:3000/purchase/update_transaction_status', {
                 order_id: options.order_id,
                 payment_id: null,
                 status: 'FAILED',
@@ -74,7 +74,7 @@ window.addEventListener('DOMContentLoaded',checkUserIsPremiumOrNot)
 async function checkUserIsPremiumOrNot(){
     try{
 
-        const response1 = await axios.get('http://localhost:3000/user/is_premium')
+        const response1 = await axios.get('http://34.201.14.35:3000/user/is_premium')
         if (response1.data.isPremium == true) {
            
             document.getElementById('leaderboard-link').style.display='block';

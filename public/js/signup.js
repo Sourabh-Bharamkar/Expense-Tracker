@@ -36,7 +36,7 @@ async function signup(e) {
 
         // verify if there any user exists with same email id
 
-        const response = await axios.post('http://localhost:3000/user/signup/verify', userDetails)
+        const response = await axios.post('http://34.201.14.35:3000/user/signup/verify', userDetails)
 
         console.log(response.data)
         console.log(response.data.message)
@@ -52,7 +52,7 @@ async function signup(e) {
         }
 
         //create an account 
-        const response1 = await axios.post('http://localhost:3000/user/signup', userDetails)
+        const response1 = await axios.post('http://34.201.14.35:3000/user/signup', userDetails)
 
         if (response1.data.message == 'Account created successfully') {
             window.alert('Account created successfully!! Please login to your account.')
