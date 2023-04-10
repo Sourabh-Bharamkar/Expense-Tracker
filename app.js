@@ -49,7 +49,7 @@ DownloadedExpenseReport.belongsTo(User)
 sequelize.sync()
     .then(() => {
         app.listen(process.env.PORT || 3000)
-        console.log('listening on port 3000')
+        console.log('Listening on PORT 3000')
         
     }).catch((error) => {
         console.log(error)
