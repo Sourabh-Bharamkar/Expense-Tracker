@@ -18,7 +18,7 @@ exports.authenticate = async (req, res, next) => {
            return res.status(401).json({ message: 'authentication error' })
         }
         req.user = user1;
-        console.log(req.user)
+        console.log('user authenticated succesfully')
         next();
 
     } catch (error) {
